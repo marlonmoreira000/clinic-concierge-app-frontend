@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 
 const Nav = () => {
-    return (
+  return (
+    <>
+      <hr />
       <nav>
         <ul>
           <li>
@@ -21,7 +23,9 @@ const Nav = () => {
           </li>
         </ul>
       </nav>
-    );
+      <hr />
+    </>
+  );
 }
 
 export default Nav
