@@ -4,9 +4,6 @@ const Home = () => {
     return (
       <>
         <Hero/>
-        <hr />
-        <h1>Content</h1>
-        <hr />
       </>
     );
 }
