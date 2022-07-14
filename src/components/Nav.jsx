@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
   // state for navigation menu
@@ -15,11 +16,11 @@ const Nav = () => {
           Beachside GP.
         </h1>
         <ul className="hidden lg:flex uppercase text-[#23375d] font-bold">
-          <li className="p-4">Home</li>
-          <li className="p-4 flex-shrink-0">About us</li>
-          <li className="p-4">Doctors</li>
-          <li className="p-4">Bookings</li>
-          <li className="p-4">Contact</li>
+          <li className="p-4"><Link to="/">Home</Link></li>
+          <li className="p-4 flex-shrink-0"><Link to="/">About us</Link></li>
+          <li className="p-4"><Link to="/">Doctors</Link></li>
+          <li className="p-4"><Link to="/bookings">Bookings</Link></li>
+          <li className="p-4"><Link to="/">Contact</Link></li>
         </ul>
         <div onClick={handleNav} className="block lg:hidden">
           {nav ? <AiOutlineClose size={25} /> : <AiOutlineMenu size={25} />}
