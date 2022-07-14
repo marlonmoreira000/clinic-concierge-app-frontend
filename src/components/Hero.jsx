@@ -3,31 +3,23 @@ import Typed from "react-typed";
 
 const Hero = () => {
   return (
-    <div>
+    <div className="bg-[url('/src/assets/stonewall-banner.jpg')] bg-no-repeat bg-cover">
       <div className="max-w-[800px] mx-auto w-full h-[60vh] text-center flex flex-col justify-center">
-        <p className="font-bold p-2">GROWING WITH DATA ANALYTICS</p>
-        <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold md:py-6">
-          Grow with data.
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold md:py-6 text-[#f0edeb]">
+          Beachside GP.
         </h1>
         <div className="flex justify-center items-center">
-          <p className="text-xl sm:text-4xl md:text-5xl font-bold py-4">
-            Fast, flexible financing for
+          <p className="text-xl sm:text-4xl md:text-5xl font-bold py-4 text-[#f0edeb]">
+            We care for your
           </p>
           <Typed
-            className="text-xl sm:text-4xl md:text-5xl font-bold pl-2"
-            strings={["BTB", "BTC", "SASS"]}
-            typeSpeed={120}
-            backSpeed={140}
+            className="text-xl sm:text-4xl md:text-5xl font-bold pl-2 text-[#f0edeb]"
+            strings={["health", "welfare", "vitality"]}
+            typeSpeed={160}
+            backSpeed={220}
             loop
           />
         </div>
-        <p className="md:text-2xl text-xl font-bold text-gray-500">
-          Monitor your data analytics to increase your revenue for BTB, BTC &
-          SASS platforms
-        </p>
-        <button className="bg-[#d3d3d3] w-[200px] rounded-md font-medium mx-auto my-6 py-3">
-          Book appointment
-        </button>
       </div>
     </div>
   );
