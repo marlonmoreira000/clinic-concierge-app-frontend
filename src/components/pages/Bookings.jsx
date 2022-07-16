@@ -19,6 +19,18 @@ const Bookings = () => {
     },
   }
 
+
+  // functions
+  const onChange = (date, dateString) => {
+    console.log(date, dateString);
+  };
+
+  const handleMenuClick = (e) => {
+    const doctorSelection = e.domEvent.target.textContent;
+    console.log(doctorSelection);
+    setDoctor(doctorSelection);
+  };
+
   const menu = (
     <Menu
       onClick={handleMenuClick}
@@ -38,17 +50,6 @@ const Bookings = () => {
       ]}
     />
   );
-
-  // functions
-  const onChange = (date, dateString) => {
-    console.log(date, dateString);
-  };
-
-  const handleMenuClick = (e) => {
-    const doctorSelection = e.domEvent.target.textContent;
-    console.log(doctorSelection);
-    setDoctor(doctorSelection);
-  };
 
   // return statement
   return (
