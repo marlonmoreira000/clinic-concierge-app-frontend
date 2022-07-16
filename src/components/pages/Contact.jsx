@@ -1,4 +1,5 @@
 import Header from "../Header";
+import img from "/src/assets/map.png";
 
 const Contact = () => {
   return (
@@ -18,7 +19,7 @@ const Contact = () => {
             </p>
           </div>
           <div className="p-8">
-            <img className="w-[700px]" src="/src/assets/map.png" alt="/" />
+            <img className="w-[700px]" src={img} alt="/" />
           </div>
         </div>
       </div>

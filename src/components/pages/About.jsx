@@ -1,4 +1,5 @@
 import Header from "../Header";
+import img from "/src/assets/about-us.jpg"
 
 const About = () => {
   return (
@@ -9,7 +10,7 @@ const About = () => {
           <div className="p-6">
             <img
               className="w-[400px] md:w-[550px] shadow-lg rounded-md"
-              src="/src/assets/about-us.jpg"
+              src={img}
               alt="/"
             />
           </div>

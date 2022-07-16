@@ -1,4 +1,5 @@
 import Header from "../Header";
+import img from "/src/assets/about-us.jpg";
 
 const Doctors = () => {
   return (
@@ -9,7 +10,7 @@ const Doctors = () => {
           <div className="p-4 w-[350px]">
             <img
               className="w-[300px] shadow-lg rounded-md"
-              src="/src/assets/about-us.jpg"
+              src={img}
               alt=""
             />
             <div className="p-4">
@@ -29,7 +30,7 @@ const Doctors = () => {
           <div className="p-4 w-[350px]">
             <img
               className="w-[300px] shadow-lg rounded-md"
-              src="/src/assets/about-us.jpg"
+              src={img}
               alt=""
             />
             <div className="p-4">
@@ -49,7 +50,7 @@ const Doctors = () => {
           <div className="p-4 w-[350px]">
             <img
               className="w-[300px] shadow-lg rounded-md"
-              src="/src/assets/about-us.jpg"
+              src={img}
               alt=""
             />
             <div className="p-4">
