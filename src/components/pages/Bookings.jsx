@@ -63,7 +63,7 @@ const Bookings = () => {
           </div>
           {/* time slots */}
           <div>
-
+            
           </div>
         </div>
       </div>
