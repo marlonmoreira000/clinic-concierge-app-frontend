@@ -1,13 +1,29 @@
-const Contact = () => {
-    return (
-      <>
-        <hr />
-        <h1>Contact banner heading</h1>
-        <hr />
-        <h1>Content</h1>
-        <hr />
-      </>
-    );
-}
+import Header from "../Header";
 
-export default Contact
+const Contact = () => {
+  return (
+    <>
+      <Header text="Contact." />
+      <div>
+        <div className="py-12 flex flex-col items-center">
+          <div className="text-center p-8 max-w-[700px]">
+            <h3 className="text-xl font-bold pb-4">Details</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit,
+              quisquam in consequatur provident voluptas perspiciatis nam
+              ratione, ipsam, blanditiis asperiores unde. Laboriosam hic veniam
+              laudantium consequuntur! Quia quasi id error, corrupti ipsam amet
+              molestias natus illum impedit animi aperiam tempora minus ea cum
+              a. Dignissimos aspernatur eveniet nulla et eius.
+            </p>
+          </div>
+          <div className="p-8">
+            <img className="w-[700px]" src="/src/assets/map.png" alt="/" />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Contact;

@@ -17,10 +17,10 @@ const Nav = () => {
         </h1>
         <ul className="hidden lg:flex uppercase text-[#23375d] font-bold">
           <li className="p-4"><Link to="/">Home</Link></li>
-          <li className="p-4 flex-shrink-0"><Link to="/">About us</Link></li>
-          <li className="p-4"><Link to="/">Doctors</Link></li>
+          <li className="p-4 flex-shrink-0"><Link to="/about">About us</Link></li>
+          <li className="p-4"><Link to="/doctors">Doctors</Link></li>
           <li className="p-4"><Link to="/bookings">Bookings</Link></li>
-          <li className="p-4"><Link to="/">Contact</Link></li>
+          <li className="p-4"><Link to="/contact">Contact</Link></li>
         </ul>
         <div onClick={handleNav} className="block lg:hidden">
           {nav ? <AiOutlineClose size={25} /> : <AiOutlineMenu size={25} />}

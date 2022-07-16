@@ -1,5 +1,4 @@
 import React from "react";
-// import Typed from "react-typed";
 
 const Hero = () => {
   return (
@@ -10,15 +9,8 @@ const Hero = () => {
         </h1>
         <div className="flex justify-center items-center">
           <p className="text-xl sm:text-4xl md:text-5xl font-bold py-4 text-[#f0edeb]">
-            Our GPs care for your wellness.
+            Our GPs care about your wellbeing.
           </p>
-          {/* <Typed
-            className="text-xl sm:text-4xl md:text-5xl font-bold pl-2 text-[#f0edeb]"
-            strings={["health", "welfare", "vitality"]}
-            typeSpeed={160}
-            backSpeed={220}
-            loop
-          /> */}
         </div>
       </div>
     </div>
