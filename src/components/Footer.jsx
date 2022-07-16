@@ -12,7 +12,9 @@ const Footer = () => {
     <div className="w-full bg-[#23375d]">
       <div className="max-w-[1240px] mx-auto py-16 px-4 grid lg:grid-cols-3 gap-8 text-gray-300">
         <div>
-          <h1 className="w-full text-3xl font-bold">Beachside GP.</h1>
+          <h1 className="w-full text-3xl font-bold text-[#f0edeb]">
+            Beachside GP.
+          </h1>
           <p className="py-4 pr-[1rem]">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id odit
             ullam iste repellat consequatur libero reiciendis, blanditiis
