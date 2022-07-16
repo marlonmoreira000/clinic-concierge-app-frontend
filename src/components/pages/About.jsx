@@ -13,7 +13,7 @@ const About = () => {
               alt="/"
             />
           </div>
-          <div className="max-w-[600px] p-4 text-lg">
+          <div className="max-w-[600px] p-4">
             <p>
               Without exception, we’re here for you, and go out of our way to
               make sure your experience is welcoming, comfortable, and
