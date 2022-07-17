@@ -1,24 +1,21 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import FormInput from "../form_components/FormInput";
-import { useToken } from "../auth/useToken";
+import { Link } from "react-router-dom";
 import axios from "axios";
+import { useToken } from "../auth/useToken";
 import toast from "react-hot-toast";
 
-const Register = () => {
-  const [token, setToken] = useToken();
-  const navigate = useNavigate();
-
-  // Send request with supplied values to server for confirmation
+const Login = () => {
+  const [token, setToken] = useToken ()
+  
+  // Login
   const onFinish = async (values) => {
     try {
-      const response = await axios.post("/api/v1/user/register", values);
-        email: 
-      // If Registration successful, notify user and redirect to login, otherwise notify error
+      const response = await axios.post("/api/user/login", values);
       if (!response.data.error) {
         toast.success(response.data.message);
-        toast("Redirecting to Login");
-        navigate("/login");
+        localStorage.setItem("token", response.data.data);
+        // navigate("/");
       } else {
         toast.error(response.data.message);
       }
@@ -27,13 +24,12 @@ const Register = () => {
     }
   };
 
-  // Form details
+  //Form Data
 
   // Use state to update form input fields with user-supplied values - setting initial values to empty
   const [values, setValues] = useState({
     email: "",
     password: "",
-    confirmPassword: "",
   });
 
   // Array of input/form fields to render
@@ -52,20 +48,7 @@ const Register = () => {
       name: "password",
       type: "password",
       placeholder: "Password",
-      errorMessage:
-        "Password should be 8-26 characters and include at least: 1 upper- and 1 lower-case letter, 1 number, and 1 special character",
       label: "Password",
-      pattern: `^(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,26}).*$`,
-      required: true,
-    },
-    {
-      id: 3,
-      name: "confirmPassword",
-      type: "password",
-      placeholder: "Confirm Password",
-      errorMessage: "Passwords don't match",
-      label: "Confirm Password",
-      pattern: values.password,
       required: true,
     },
   ];
@@ -76,8 +59,8 @@ const Register = () => {
   };
 
   return (
-    <div className="registrationForm">
-      <form onSubmit={onFinish}>
+    <div className="loginForm">
+      <form onFinish={onFinish}>
         <h1>Register</h1>
 
         {/* Render form/input field for each input supplied above */}
@@ -89,11 +72,12 @@ const Register = () => {
             onChange={onChange}
           />
         ))}
-        <button>Submit</button>
+        <button>Log In</button>
       </form>
-      <Link to="/register">Log In</Link>
+      <Link to="/register">Register</Link>
+      <Link to="/forgot-password">Forgotten Password?</Link>
     </div>
   );
 };
 
-export default Register;
+export default Login;

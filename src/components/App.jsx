@@ -6,6 +6,7 @@ import Doctors from "./pages/Doctors";
 import Bookings from "./pages/Bookings";
 import Contact from "./pages/Contact";
 import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/bookings" element={<Bookings />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
