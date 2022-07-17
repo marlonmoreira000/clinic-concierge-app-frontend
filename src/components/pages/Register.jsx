@@ -1,20 +1,20 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import FormInput from "../form_components/FormInput";
-import { useToken } from "../auth/useToken";
+// import { useToken } from "../auth/useToken";
 import axios from "axios";
 import toast from "react-hot-toast";
 
 const Register = () => {
-  const [token, setToken] = useToken();
+  // const [token, setToken] = useToken();
   const navigate = useNavigate();
 
   // Send request with supplied values to server for confirmation
   const onFinish = async (values) => {
     try {
-      const response = await axios.post("/api/v1/user/register", values);
+      const response = await axios.post("/api/v1/register", values);
         email: 
-      // If Registration successful, notify user and redirect to login, otherwise notify error
+      // If registration successful, notify user and redirect to login, otherwise notify error
       if (!response.data.error) {
         toast.success(response.data.message);
         toast("Redirecting to Login");
