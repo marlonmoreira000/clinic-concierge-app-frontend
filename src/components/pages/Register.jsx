@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { Form, Input, Button } from "antd";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import FormInput from "../form_components/FormInput";
-// import { useToken } from "../auth/useToken";
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -13,7 +12,6 @@ const Register = () => {
   const onFinish = async (values) => {
     try {
       const response = await axios.post("/api/v1/register", values);
-        email: 
       // If registration successful, notify user and redirect to login, otherwise notify error
       if (!response.data.error) {
         toast.success(response.data.message);
@@ -27,71 +25,51 @@ const Register = () => {
     }
   };
 
-  // Form details
-
-  // Use state to update form input fields with user-supplied values - setting initial values to empty
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  // Array of input/form fields to render
-  const inputs = [
-    {
-      id: 1,
-      name: "email",
-      type: "email",
-      placeholder: "Email",
-      errorMessage: "Must be a valid email address",
-      label: "Email",
-      required: true,
-    },
-    {
-      id: 2,
-      name: "password",
-      type: "password",
-      placeholder: "Password",
-      errorMessage:
-        "Password should be 8-26 characters and include at least: 1 upper- and 1 lower-case letter, 1 number, and 1 special character",
-      label: "Password",
-      pattern: `^(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,26}).*$`,
-      required: true,
-    },
-    {
-      id: 3,
-      name: "confirmPassword",
-      type: "password",
-      placeholder: "Confirm Password",
-      errorMessage: "Passwords don't match",
-      label: "Confirm Password",
-      pattern: values.password,
-      required: true,
-    },
-  ];
-
-  // Update input fields with user-supplied values
-  const onChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
-
   return (
-    <div className="registrationForm">
-      <form onSubmit={onFinish}>
-        <h1>Register</h1>
+    <div className="authentication">
+      <div className="registration">
+        <h1 className="card-title">Please Register</h1>
+        <Form layout="vertical" onFinish={onFinish}>
+          <Form.Item
+            label="Email"
+            name="email"
+            rules={[
+              {
+                type: "email",
+                message: "Must be valid email",
+              },
+              {
+                required: true,
+                message: "Email is required",
+              },
+            ]}
+          >
+            <Input placeholder="Email" />
+          </Form.Item>
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[
+              {
+                pattern: `^(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,26}).*$`,
+                message:
+                  "${label} should be 8-26 characters and include at least: 1 upper- and 1 lower-case letter, 1 number, and 1 special character",
+              },
+              {
+                required: true,
+                message: "Password is required",
+              },
+            ]}
+          >
+            <Input placeholder="Password" type="password" />
+          </Form.Item>
+          <Button type="primary" htmlType="submit">Register!</Button>
 
-        {/* Render form/input field for each input supplied above */}
-        {inputs.map((input) => (
-          <FormInput
-            key={input.id}
-            {...input}
-            value={values[input.name]}
-            onChange={onChange}
-          />
-        ))}
-        <button>Submit</button>
-      </form>
-      <Link to="/register">Log In</Link>
+          <Link className="anchor" to="/login">
+            Login
+          </Link>
+        </Form>
+      </div>
     </div>
   );
 };
