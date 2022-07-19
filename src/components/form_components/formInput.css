@@ -1,0 +1,17 @@
+/* Some styling required to display error messages ONLY when input is invalid and focus moves from field*/
+
+/* Set to not display by default */
+span {
+    color: red;
+    display: none;
+}
+
+/* Highlight fields with invalid input by changing border colour to red */
+input:invalid[focused="true"] {
+    border: 1px solid red !important;
+}
+
+/* Displays error message when focus moves away from a field and input in that field is invalid */
+input:invalid[focused="true"] ~ span {
+    display: block;
+}

@@ -34,6 +34,12 @@ const Nav = () => {
           <li className="p-4 flex-shrink-0">
             <Link to="/sign-in">Sign in</Link>
           </li>
+          <li>
+            <Link to="/register">Register</Link>
+          </li>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
         </ul>
         <div onClick={handleNav} className="block lg:hidden">
           {nav ? <AiOutlineClose size={25} /> : <AiOutlineMenu size={25} />}
