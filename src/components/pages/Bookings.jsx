@@ -27,9 +27,14 @@ const Bookings = () => {
   };
 
   const handleMenuClick = (e) => {
-    const doctorSelection = e.domEvent.target.textContent;
-    console.log(doctorSelection);
-    setDoctor(doctorSelection);
+    // make an api call to get appts for doctor1
+
+    fetch(url)
+    .then()
+
+    // const doctorSelection = e.domEvent.target.textContent;
+    // console.log(doctorSelection);
+    // setDoctor(doctorSelection);
   };
 
   const menu = (
@@ -37,15 +42,15 @@ const Bookings = () => {
       onClick={handleMenuClick}
       items={[
         {
-          label: "doctorA",
+          label: "doctor1",
           key: "1",
         },
         {
-          label: "doctorB",
+          label: "doctor2",
           key: "2",
         },
         {
-          label: "doctorC",
+          label: "doctor3",
           key: "3",
         },
       ]}
