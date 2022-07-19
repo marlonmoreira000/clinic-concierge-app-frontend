@@ -1,61 +1,96 @@
-import Appointments from "../Appointments";
-import { DatePicker, Button, Dropdown, Menu, Space } from "antd";
-import React, { useState } from "react";
+import { DatePicker, Button, Dropdown, Menu } from "antd";
+import React, { useState, useEffect } from "react";
 import Header from "../Header";
+import { Link } from "react-router-dom";
 
 const Bookings = () => {
   // dynamic data ("state")
-  const [doctor, setDoctor] = useState(false);
+  const [doctors, setDoctors] = useState(false);
+  const [date, setDate] = useState(false)
+  const [doctor, setDoctor] = useState('');
+  const [dropdownItems, setDropdownItems] = useState(false); // represents the doctor selected on dropdown
+  const [appointments, setAppointments] = useState(false)
 
-  // static data
-  const doctors = {
-    doctorA: {
-      appointments: [1, 2, 3, 4, 5],
-    },
-    doctorB: {
-      appointments: [1, 2, 4, 5],
-    },
-    doctorC: {
-      appointments: [2, 3, 4],
-    },
-  }
+  useEffect(() => {
+    // get doctors info from API
+    fetch("https://clinic-concierge.herokuapp.com/api/v1/doctors/")
+      .then((res) => res.json())
+      .then((data) => {
+        setDoctors(data);
+        setDropdownItems(getDropdownItems(data));
+        console.log("doctors", data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    // get doctors info from API
+    fetch("https://clinic-concierge.herokuapp.com/api/v1/appointments/")
+      .then((res) => res.json())
+      .then((data) => {
+        setAppointments(data);
+        console.log("appointments", data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  
+  useEffect(() => {
+    // get appointments info from API
+    // if (date && doctor) {
+      
+    // } else if (date) {
+
+    // } else if (doctor) {
+
+    // } else {
+
+    // }
+    const fromDate = new Date(date);
+    const toDate = new Date(date);
+    toDate.setDate(toDate.getDate() + 1);
+    const fromTime = fromDate.toJSON();
+    const toTime = toDate.toJSON();
+    // console.log(fromTime, toTime);
+    fetch(
+      `https://clinic-concierge.herokuapp.com/api/v1/appointments?fromTime=${fromTime}&toTime=${toTime}&doctorId=${doctor}`
+    ).then((res) => res.json())
+      .then((data) => {
+        setAppointments(data)
+        console.log("appointments 2", data)
+      });
+  }, [date, doctor]);
 
 
   // functions
-  const onChange = (date, dateString) => {
+  const getDropdownItems = (data) => {
+    let arr = [];
+    data.forEach((item, index) => {
+      arr.push({
+        label: <a id={item["_id"]}>{item["first_name"]}</a>,
+        key: `${index + 1}`,
+      });
+    });
+    return arr;
+  };
+
+  const handleCalendarClick = (date, dateString) => {
+    setDate(dateString)
     console.log(date, dateString);
   };
 
-  const handleMenuClick = (e) => {
-    // make an api call to get appts for doctor1
+  const handleDropdownClick = (e) => {
+    const doctorId = e.domEvent.target.id;
+    setDoctor(doctorId);
+    console.log(doctorId);
 
-    fetch(url)
-    .then()
-
-    // const doctorSelection = e.domEvent.target.textContent;
-    // console.log(doctorSelection);
-    // setDoctor(doctorSelection);
+    // get appointments for that doctor from the api (using doctor id)
+    // fetch(
+    //   `https://clinic-concierge.herokuapp.com/api/v1/appointments?doctorId=${doctorId}`
+    // )
+    //   .then((res) => res.json())
   };
 
-  const menu = (
-    <Menu
-      onClick={handleMenuClick}
-      items={[
-        {
-          label: "doctor1",
-          key: "1",
-        },
-        {
-          label: "doctor2",
-          key: "2",
-        },
-        {
-          label: "doctor3",
-          key: "3",
-        },
-      ]}
-    />
-  );
+  const menu = <Menu onClick={handleDropdownClick} items={dropdownItems} />;
 
   // return statement
   return (
@@ -65,7 +100,7 @@ const Bookings = () => {
         <div className="text-center">
           {/* filter bar */}
           <div>
-            <DatePicker onChange={onChange} />
+            <DatePicker onChange={handleCalendarClick} />
             <Dropdown overlay={menu} placement="bottom">
               <Button>Choose Doctor</Button>
             </Dropdown>
@@ -73,13 +108,15 @@ const Bookings = () => {
           {/* time slots */}
           <div>
             <ul>
-              <li>
-                {doctor
-                  ? doctors[doctor].appointments.map((item, index) => {
-                      return <li key={index}>{item}</li>;
-                    })
-                  : "select a doctor"}
-              </li>
+              {appointments
+                ? appointments.map((item, index) => {
+                    return (
+                      <li key={index}>
+                        <Link to="#">{item.doctor_id}</Link>
+                      </li>
+                    );
+                  })
+                : "Select a date and/or doctor"}
             </ul>
           </div>
         </div>
