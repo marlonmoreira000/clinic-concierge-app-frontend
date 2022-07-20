@@ -6,10 +6,10 @@ import { Link } from "react-router-dom";
 const Bookings = () => {
   // dynamic data ("state")
   const [doctors, setDoctors] = useState(false);
-  const [date, setDate] = useState(false)
-  const [doctor, setDoctor] = useState('');
-  const [dropdownItems, setDropdownItems] = useState(false); // represents the doctor selected on dropdown
-  const [appointments, setAppointments] = useState(false)
+  const [date, setDate] = useState("");
+  const [doctor, setDoctor] = useState(""); // represents doctor selected on dropdown
+  const [dropdownItems, setDropdownItems] = useState(false);
+  const [appointments, setAppointments] = useState(false);
 
   useEffect(() => {
     // get doctors info from API
@@ -29,41 +29,32 @@ const Bookings = () => {
       .then((res) => res.json())
       .then((data) => {
         setAppointments(data);
-        console.log("appointments", data);
+        console.log("all appointments", data);
       })
       .catch((err) => console.log(err));
   }, []);
-  
+
   useEffect(() => {
-    // get appointments info from API
-    // if (date && doctor) {
-      
-    // } else if (date) {
-
-    // } else if (doctor) {
-
-    // } else {
-
-    // }
     const fromDate = new Date(date);
     const toDate = new Date(date);
     toDate.setDate(toDate.getDate() + 1);
-    const fromTime = fromDate.toJSON();
-    const toTime = toDate.toJSON();
-    // console.log(fromTime, toTime);
+    const fromTime = fromDate.toJSON() || "";
+    const toTime = toDate.toJSON() || "";
+    console.log(fromTime, toTime);
     fetch(
       `https://clinic-concierge.herokuapp.com/api/v1/appointments?fromTime=${fromTime}&toTime=${toTime}&doctorId=${doctor}`
-    ).then((res) => res.json())
+    )
+      .then((res) => res.json())
       .then((data) => {
-        setAppointments(data)
-        console.log("appointments 2", data)
+        setAppointments(data);
+        console.log("filtered appointments", data);
       });
   }, [date, doctor]);
 
-
   // functions
   const getDropdownItems = (data) => {
-    let arr = [];
+    let arr = [{ label: "All doctors", key: "0" }]; // set initial value
+    // let arr = []; // set initial value
     data.forEach((item, index) => {
       arr.push({
         label: <a id={item["_id"]}>{item["first_name"]}</a>,
@@ -74,7 +65,7 @@ const Bookings = () => {
   };
 
   const handleCalendarClick = (date, dateString) => {
-    setDate(dateString)
+    setDate(dateString);
     console.log(date, dateString);
   };
 
@@ -82,12 +73,6 @@ const Bookings = () => {
     const doctorId = e.domEvent.target.id;
     setDoctor(doctorId);
     console.log(doctorId);
-
-    // get appointments for that doctor from the api (using doctor id)
-    // fetch(
-    //   `https://clinic-concierge.herokuapp.com/api/v1/appointments?doctorId=${doctorId}`
-    // )
-    //   .then((res) => res.json())
   };
 
   const menu = <Menu onClick={handleDropdownClick} items={dropdownItems} />;
@@ -116,7 +101,7 @@ const Bookings = () => {
                       </li>
                     );
                   })
-                : "Select a date and/or doctor"}
+                : "Loading..."}
             </ul>
           </div>
         </div>
