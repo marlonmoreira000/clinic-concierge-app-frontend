@@ -97,7 +97,7 @@ const Bookings = () => {
                 ? appointments.map((item, index) => {
                     return (
                       <li key={index}>
-                        <Link to="#">{item.doctor_id}</Link>
+                        <Link to={`/bookings/${item._id}`}>{item.doctor_id}</Link>
                       </li>
                     );
                   })
