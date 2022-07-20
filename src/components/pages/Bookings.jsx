@@ -1,7 +1,8 @@
 import { DatePicker, Button, Dropdown, Menu } from "antd";
 import React, { useState, useEffect } from "react";
 import Header from "../Header";
-import { Link } from "react-router-dom";
+
+import TimeslotCard from "../TimeslotCard";
 
 const Bookings = () => {
   // dynamic data ("state")
@@ -95,31 +96,8 @@ const Bookings = () => {
             <ul className="pt-6">
               {appointments
                 ? appointments.map((item, index) => {
-                    return (
-                      <Link to={`/bookings/${item._id}`}>
-                        <li
-                          className="border py-4 my-4 max-w-[700px] mx-auto rounded-lg bg-white shadow-md hover:bg-gray-100 text-black hover:text-black"
-                          key={index}
-                        >
-                          <div className="mx-auto">
-                            <p className="w-full text-4xl font-bold">
-                              {item.appointment_slot.start_time.slice(11, 16)}
-                            </p>
-                            <p className="w-full">
-                              <span className="font-bold">Date: </span>
-                              {item.appointment_slot.start_time.slice(0, 10)}
-                            </p>
-                            <p className="w-full">
-                              <span className="font-bold">Doctor: </span>
-                              { doctors ?
-                                doctors.find(
-                                  (doc) => doc._id === item.doctor_id
-                                ).first_name : "...loading"
-                              }
-                            </p>
-                          </div>
-                        </li>
-                      </Link>
+                  return (
+                      <TimeslotCard item={item} index={index} doctors={doctors} />
                     );
                   })
                 : "Loading..."}
