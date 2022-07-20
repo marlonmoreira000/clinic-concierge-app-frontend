@@ -81,24 +81,45 @@ const Bookings = () => {
   return (
     <>
       <Header text="Bookings." />
-      <div className="w-full p-8">
+      <div className="w-full p-8 bg-[#f0edeb]">
         <div className="text-center">
           {/* filter bar */}
           <div>
             <DatePicker onChange={handleCalendarClick} />
             <Dropdown overlay={menu} placement="bottom">
-              <Button>Choose Doctor</Button>
+              <Button className="bg-white">Choose Doctor</Button>
             </Dropdown>
           </div>
           {/* time slots */}
           <div>
-            <ul>
+            <ul className="pt-6">
               {appointments
                 ? appointments.map((item, index) => {
                     return (
-                      <li key={index}>
-                        <Link to={`/bookings/${item._id}`}>{item.doctor_id}</Link>
-                      </li>
+                      <Link to={`/bookings/${item._id}`}>
+                        <li
+                          className="border py-4 my-4 max-w-[700px] mx-auto rounded-lg bg-white shadow-md hover:bg-gray-100 text-black hover:text-black"
+                          key={index}
+                        >
+                          <div className="mx-auto">
+                            <p className="w-full text-4xl font-bold">
+                              {item.appointment_slot.start_time.slice(11, 16)}
+                            </p>
+                            <p className="w-full">
+                              <span className="font-bold">Date: </span>
+                              {item.appointment_slot.start_time.slice(0, 10)}
+                            </p>
+                            <p className="w-full">
+                              <span className="font-bold">Doctor: </span>
+                              { doctors ?
+                                doctors.find(
+                                  (doc) => doc._id === item.doctor_id
+                                ).first_name : "...loading"
+                              }
+                            </p>
+                          </div>
+                        </li>
+                      </Link>
                     );
                   })
                 : "Loading..."}

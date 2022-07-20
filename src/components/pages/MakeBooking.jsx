@@ -62,8 +62,8 @@ const MakeBooking = () => {
   return (
     <>
       <Header text="Make Booking" />
-      <div>
-        <div className="p-12 flex flex-col justify-center max-w-[700px] mx-auto border border-gray-300 rounded-lg my-8">
+      <div className="bg-[#f0edeb] py-8">
+        <div className="p-12 flex flex-col justify-center max-w-[700px] mx-auto border border-gray-300 rounded-lg bg-white">
           <div>
             <h3 className="text-xl font-bold pb-2">Appointment Details</h3>
             <p className="py-2">
