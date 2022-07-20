@@ -24,8 +24,8 @@ const Bookings = () => {
   }, []);
 
   useEffect(() => {
-    // get doctors info from API
-    fetch("https://clinic-concierge.herokuapp.com/api/v1/appointments/")
+    // get available appointments from API
+    fetch("https://clinic-concierge.herokuapp.com/api/v1/appointments?booked=false")
       .then((res) => res.json())
       .then((data) => {
         setAppointments(data);
@@ -42,7 +42,7 @@ const Bookings = () => {
     const toTime = toDate.toJSON() || "";
     console.log(fromTime, toTime);
     fetch(
-      `https://clinic-concierge.herokuapp.com/api/v1/appointments?fromTime=${fromTime}&toTime=${toTime}&doctorId=${doctor}`
+      `https://clinic-concierge.herokuapp.com/api/v1/appointments?fromTime=${fromTime}&toTime=${toTime}&doctorId=${doctor}&booked=false`
     )
       .then((res) => res.json())
       .then((data) => {
