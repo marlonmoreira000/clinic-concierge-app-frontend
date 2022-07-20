@@ -65,7 +65,7 @@ const MakeBooking = () => {
       <div className="bg-[#f0edeb] py-8">
         <div className="p-12 flex flex-col justify-center max-w-[700px] mx-auto border border-gray-300 rounded-lg bg-white">
           <div>
-            <h3 className="text-xl font-bold pb-2">Appointment Details</h3>
+            <h3 className="text-2xl font-bold pb-2">Appointment Details</h3>
             <p className="py-2">
               <span className="font-bold">Patient name:</span> LeChamp McDoggus
             </p>
@@ -83,7 +83,7 @@ const MakeBooking = () => {
             </p>
           </div>
           <div className="pt-6">
-            <h3 className="text-xl font-bold">Notes</h3>
+            <h3 className="text-2xl font-bold">Notes</h3>
             <TextArea
               showCount
               maxLength={200}
@@ -93,7 +93,7 @@ const MakeBooking = () => {
               onChange={handleNotesChange}
             />
           </div>
-          <div className="font-bold flex justify-center">
+          <div className="font-bold flex justify-center pt-6">
             <button
               onClick={handleButtonClick}
               className="bg-[#23375d] hover:bg-[#334b88] text-gray-100 py-3 px-6 rounded-md"

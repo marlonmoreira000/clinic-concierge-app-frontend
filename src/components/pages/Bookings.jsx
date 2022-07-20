@@ -1,7 +1,6 @@
 import { DatePicker, Button, Dropdown, Menu } from "antd";
 import React, { useState, useEffect } from "react";
 import Header from "../Header";
-
 import TimeslotCard from "../TimeslotCard";
 
 const Bookings = () => {

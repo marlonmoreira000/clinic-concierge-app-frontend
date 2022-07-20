@@ -28,6 +28,9 @@ const Nav = () => {
           <li className="p-4">
             <Link to="/bookings">Bookings</Link>
           </li>
+          <li className="p-4 flex-shrink-0">
+            <Link to="/my-appointments">My appts</Link>
+          </li>
           <li className="p-4">
             <Link to="/contact">Contact</Link>
           </li>
