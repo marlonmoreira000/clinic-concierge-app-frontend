@@ -14,7 +14,7 @@ const Login = () => {
       const response = await axios.post("https://clinic-concierge.herokuapp.com/api/v1/login", values);
       if (!response.data.error) {
         toast.success(response.data.message);
-        console.log(response.data);
+        setToken(response.data.accessToken);
 
         navigate("/");
       } else {
