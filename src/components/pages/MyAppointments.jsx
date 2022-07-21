@@ -2,12 +2,14 @@ import React from "react";
 import Header from "../Header";
 import { useEffect, useState } from "react";
 import { message } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const MyAppointments = () => {
   const [appointments, setAppointments] = useState(false);
   const [myAppointments, setMyAppointments] = useState(false);
   const [doctors, setDoctors] = useState(false);
   const [deleteButtonClick, setDeleteButtonClick] = useState(false);
+  const nav = useNavigate();
 
   useEffect(() => {
     // get doctors info from API
@@ -54,7 +56,7 @@ const MyAppointments = () => {
     )
       .then(() => {
         message.success("Your appointment was deleted.");
-        setDeleteButtonClick(deleteButtonClick ? false : true) // this triggers rerender of myAppointments
+        setDeleteButtonClick(deleteButtonClick ? false : true); // this triggers rerender of myAppointments
       })
       .catch((err) => {
         console.log(err);
@@ -63,7 +65,12 @@ const MyAppointments = () => {
   };
 
   const handleEditButtonClick = (e) => {
-    console.log(e.target.id);
+    const appointmentId = e.target.attributes.appt.value
+    //   navigate to the appointments page
+    nav(`/bookings/${appointmentId}`)
+    console.log(appointmentId);
+    // present them with a button (confirm changes)
+    // when button is pressed, update the appointment
   };
 
   return (
@@ -115,6 +122,7 @@ const MyAppointments = () => {
                           </p>
                           <div>
                             <button
+                              appt={item.appointment_id}
                               id={item._id}
                               onClick={handleEditButtonClick}
                               className="bg-[#d6c44e] hover:bg-[#e2d687] text-gray-100 font-bold py-2 px-6 rounded-md mt-2 mb-2 mx-[1rem]"
@@ -122,6 +130,7 @@ const MyAppointments = () => {
                               Edit
                             </button>
                             <button
+                              appt={item.appointment_id}
                               id={item._id}
                               onClick={handleDeleteButtonClick}
                               className="bg-[#d25c5c] hover:bg-[#e49292] text-gray-100 font-bold py-2 px-6 rounded-md mt-2 mb-2 mx-[1rem]"

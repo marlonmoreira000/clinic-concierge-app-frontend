@@ -8,6 +8,7 @@ const MakeBooking = () => {
   // state
   const [appointment, setAppointment] = useState("");
   const [notes, setNotes] = useState("");
+  const [bookings, setBookings] = useState("");
 
   // variables
   const { TextArea } = Input;
@@ -24,6 +25,23 @@ const MakeBooking = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  useEffect(() => {
+    // get bookings info from API
+    fetch("https://clinic-concierge.herokuapp.com/api/v1/bookings")
+      .then((res) => res.json())
+      .then((data) => {
+        setBookings(data);
+        console.log("bookings", data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+    
+    useEffect(() => {
+        if (bookings && appointment && appointment.booked) {
+            setNotes(bookings.find((item) => item.appointment_id === appointment._id).reason_for_visit)
+        }
+    }, [bookings, appointment]);
+
   // functions
   const handleNotesChange = (e) => {
     // console.log(e.target.value);
@@ -32,31 +50,40 @@ const MakeBooking = () => {
 
   const handleButtonClick = (e) => {
     // send POST request to make booking
-    fetch(`https://clinic-concierge.herokuapp.com/api/v1/bookings`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        appointment_id: appointment._id,
-        patient_id: "62d037df1ceb4dda0110949c", // hard-coded value for MVP
-        reason_for_visit: notes || 'no notes provided',
-      }),
-    })
-      .then((res) => res.json())
-        .then((data) => {
-            console.log(data)
-            nav("/")
-            message.success("Your appointment has been booked!");
-        })
-        .catch((err) => {
-            console.log("error", err)
-            nav("/")
-            message.error("There was a booking error. Please try again.");
-        });
-      
-    // redirect to homepage with 
+    fetch(
+      `https://clinic-concierge.herokuapp.com/api/v1/bookings/${
+        appointment.booked ? appointment._id : ""
+      }`,
+      {
+        method: appointment.booked ? "PUT" : "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          appointment_id: params.id,
+          patient_id: "62d037df1ceb4dda0110949c", // hard-coded value for MVP
+          reason_for_visit: notes || "no notes provided",
+        }),
+      }
+    )
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        nav("/");
+        message.success(
+          `Your appointment has been ${
+            appointment.booked ? "changed" : "booked"
+          }!`
+        );
+      })
+      .catch((err) => {
+        console.log("error", err);
+        nav("/");
+        message.error("There was an error. Please try again.");
+      });
   };
 
   return (
@@ -85,8 +112,9 @@ const MakeBooking = () => {
           <div className="pt-6">
             <h3 className="text-2xl font-bold">Notes</h3>
             <TextArea
-              showCount
+                          showCount
               maxLength={200}
+              value={notes}
               style={{
                 height: 180,
               }}
@@ -98,7 +126,7 @@ const MakeBooking = () => {
               onClick={handleButtonClick}
               className="bg-[#23375d] hover:bg-[#334b88] text-gray-100 py-3 px-6 rounded-md"
             >
-              Confirm Booking
+              {appointment.booked ? "Confirm Changes" : "Confirm Booking"}
             </button>
           </div>
         </div>

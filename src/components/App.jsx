@@ -8,6 +8,7 @@ import MakeBooking from "./pages/MakeBooking";
 import MyAppointments from "./pages/MyAppointments";
 import Contact from "./pages/Contact";
 import Signin from "./pages/Signin";
+import PageNotFound from "./pages/PageNotFound";
 import Footer from "./Footer";
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/my-appointments" element={<MyAppointments />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/sign-in" element={<Signin />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />
     </BrowserRouter>
