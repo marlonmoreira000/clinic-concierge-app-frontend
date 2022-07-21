@@ -1,14 +1,13 @@
-import { Redirect, Route } from "react-router-dom";
 import { useUser } from "./useUser";
+import { Navigate } from "react-router-dom";
 
 // Check for logged in user for protected routes
-export const PrivateRoute = (props) => {
+export const PrivateRoute = ({children}) => {
   // Confirm logged in user with 'useUser' function
   const user = useUser();
 
-  // If no user confirmed, redirect to login, preventing access to protected routes
-  if (!user) return <Redirect to="/login" />;
-
-  // Otherwise, once logged in user confirmed, proceed to protected route
-  return <Route {...props} />;
+  if (user) {
+    return children;
+  }
+  return <Navigate to="/login" />;
 };
