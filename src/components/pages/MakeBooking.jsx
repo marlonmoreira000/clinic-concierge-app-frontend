@@ -41,7 +41,7 @@ const MakeBooking = () => {
       body: JSON.stringify({
         appointment_id: appointment._id,
         patient_id: "62d037df1ceb4dda0110949c", // hard-coded value for MVP
-        reason_for_visit: notes,
+        reason_for_visit: notes || 'no notes provided',
       }),
     })
       .then((res) => res.json())

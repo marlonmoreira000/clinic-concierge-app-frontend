@@ -1,11 +1,13 @@
 import React from "react";
 import Header from "../Header";
 import { useEffect, useState } from "react";
+import { message } from "antd";
 
 const MyAppointments = () => {
   const [appointments, setAppointments] = useState(false);
   const [myAppointments, setMyAppointments] = useState(false);
   const [doctors, setDoctors] = useState(false);
+  const [deleteButtonClick, setDeleteButtonClick] = useState(false);
 
   useEffect(() => {
     // get doctors info from API
@@ -17,17 +19,17 @@ const MyAppointments = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-    
-    useEffect(() => {
-      // get doctors info from API
-      fetch("https://clinic-concierge.herokuapp.com/api/v1/appointments/")
-        .then((res) => res.json())
-        .then((data) => {
-          setAppointments(data);
-          console.log("appointments", data);
-        })
-        .catch((err) => console.log(err));
-    }, []);
+
+  useEffect(() => {
+    // get doctors info from API
+    fetch("https://clinic-concierge.herokuapp.com/api/v1/appointments/")
+      .then((res) => res.json())
+      .then((data) => {
+        setAppointments(data);
+        console.log("appointments", data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   useEffect(() => {
     // get my appointments from API
@@ -40,7 +42,29 @@ const MyAppointments = () => {
         console.log("my appointments", data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [deleteButtonClick]);
+
+  const handleDeleteButtonClick = (e) => {
+    //   get booking id
+    const bookingId = e.target.id;
+    // delete booking using id
+    fetch(
+      `https://clinic-concierge.herokuapp.com/api/v1/bookings/${bookingId}`,
+      { method: "DELETE" }
+    )
+      .then(() => {
+        message.success("Your appointment was deleted.");
+        setDeleteButtonClick(deleteButtonClick ? false : true) // this triggers rerender of myAppointments
+      })
+      .catch((err) => {
+        console.log(err);
+        message.error("There was an error deleting message");
+      });
+  };
+
+  const handleEditButtonClick = (e) => {
+    console.log(e.target.id);
+  };
 
   return (
     <>
@@ -79,13 +103,29 @@ const MyAppointments = () => {
                           </p>
                           <p className="w-full">
                             <span className="font-bold">Doctor: </span>
-                            doctor here
+                            {doctors && appointments
+                              ? doctors.find(
+                                  (doc) =>
+                                    doc._id ===
+                                    appointments.find(
+                                      (appt) => appt._id === item.appointment_id
+                                    ).doctor_id
+                                ).first_name
+                              : "...loading"}
                           </p>
                           <div>
-                            <button className="bg-[#d6c44e] hover:bg-[#e2d687] text-gray-100 font-bold py-2 px-6 rounded-md mt-2 mb-2 mx-[1rem]">
+                            <button
+                              id={item._id}
+                              onClick={handleEditButtonClick}
+                              className="bg-[#d6c44e] hover:bg-[#e2d687] text-gray-100 font-bold py-2 px-6 rounded-md mt-2 mb-2 mx-[1rem]"
+                            >
                               Edit
                             </button>
-                            <button className="bg-[#d25c5c] hover:bg-[#e49292] text-gray-100 font-bold py-2 px-6 rounded-md mt-2 mb-2 mx-[1rem]">
+                            <button
+                              id={item._id}
+                              onClick={handleDeleteButtonClick}
+                              className="bg-[#d25c5c] hover:bg-[#e49292] text-gray-100 font-bold py-2 px-6 rounded-md mt-2 mb-2 mx-[1rem]"
+                            >
                               Delete
                             </button>
                           </div>
