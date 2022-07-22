@@ -10,7 +10,8 @@ export const useToken = () => {
 
   // Allows changing/receiving token - localStorage 'token' value changed to reflect newly received token
   const setToken = (newToken) => {
-    localStorage.setItem("token", newToken);
+    console.log("Token stored in local storage:", newToken)
+    localStorage.setItem("accessToken", newToken);
     setTokenInternal(newToken);
   };
 

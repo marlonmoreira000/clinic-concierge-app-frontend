@@ -17,9 +17,9 @@ const Bookings = () => {
     // get doctors info from API
     fetch("https://clinic-concierge.herokuapp.com/api/v1/doctors/", {
       headers: {
-        "Accept": "application/json",
+        Accept: "application/json",
         "Content-Type": " application/json",
-        "Authorization": `Bearer ${token}`
+        authorization: `Bearer ${token}`,
       },
     })
       .then((res) => res.json())
@@ -34,7 +34,14 @@ const Bookings = () => {
   useEffect(() => {
     // get available appointments from API
     fetch(
-      "https://clinic-concierge.herokuapp.com/api/v1/appointments?booked=false"
+      "https://clinic-concierge.herokuapp.com/api/v1/appointments?booked=false",
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": " application/json",
+          authorization: `Bearer ${token}`,
+        },
+      }
     )
       .then((res) => res.json())
       .then((data) => {
@@ -52,7 +59,14 @@ const Bookings = () => {
     const toTime = toDate.toJSON() || "";
     console.log(fromTime, toTime);
     fetch(
-      `https://clinic-concierge.herokuapp.com/api/v1/appointments?fromTime=${fromTime}&toTime=${toTime}&doctorId=${doctor}&booked=false`
+      `https://clinic-concierge.herokuapp.com/api/v1/appointments?fromTime=${fromTime}&toTime=${toTime}&doctorId=${doctor}&booked=false`,
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": " application/json",
+          authorization: `Bearer ${token}`,
+        },
+      }
     )
       .then((res) => res.json())
       .then((data) => {

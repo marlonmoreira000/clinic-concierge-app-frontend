@@ -6,8 +6,8 @@ const TimeslotCard = (params) => {
   return (
     <Link to={`/bookings/${item._id}`}>
       <li
-        className="border py-4 my-4 max-w-[700px] mx-auto rounded-lg bg-white shadow-md hover:bg-gray-100 text-black hover:text-black"
         key={index}
+        className="border py-4 my-4 max-w-[700px] mx-auto rounded-lg bg-white shadow-md hover:bg-gray-100 text-black hover:text-black"
       >
         <div className="mx-auto">
           <p className="w-full text-4xl font-bold">
