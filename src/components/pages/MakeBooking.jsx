@@ -80,7 +80,6 @@ const MakeBooking = () => {
         },
         body: JSON.stringify({
           appointment_id: params.id,
-          patient_id: `${user._id}`,
           reason_for_visit: notes || "no notes provided",
         }),
       }

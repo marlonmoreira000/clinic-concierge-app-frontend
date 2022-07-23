@@ -52,7 +52,7 @@ const MyAppointments = () => {
   useEffect(() => {
     // get my appointments from API
     fetch(
-      `https://clinic-concierge.herokuapp.com/api/v1/bookings?patientId=${user._id}`,
+      `https://clinic-concierge.herokuapp.com/api/v1/bookings?userId=${user._id}`,
       {
         headers: {
           Accept: "application/json",
@@ -64,7 +64,7 @@ const MyAppointments = () => {
       .then((res) => res.json())
       .then((data) => {
         setMyAppointments(data);
-        console.log("my appointments", data);
+        console.log("my bookings", data);
       })
       .catch((err) => console.log(err));
   }, [deleteButtonClick]);
