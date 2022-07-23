@@ -61,16 +61,17 @@ const MyAppointments = () => {
         },
       }
     )
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status !== 200) {
+          message.error("Could not find your appointments")
+          nav("/")
+        }
+        return res.json()
+      }
+      )
       .then((data) => {
-        if (data.status == 200) {
           setMyAppointments(data);
           console.log("my bookings", data);
-        } else {
-          message.error("Your bookings could not be found")
-          nav("/")
-          console.log("response status", data.status);
-        }
       })
       .catch((err) => console.log(err));
   }, [deleteButtonClick]);
@@ -118,68 +119,67 @@ const MyAppointments = () => {
           <div>
             <ul className="pt-6">
               {myAppointments
-                ? console.log("tester", myAppointments)
-                : // ? myAppointments.map((item, index) => {
-                  //     return (
-                  //       <li
-                  //         className="border py-4 my-4 max-w-[700px] mx-auto rounded-lg bg-white shadow-md hover:bg-gray-100 text-black hover:text-black"
-                  //         key={index}
-                  //       >
-                  //         <div className="mx-auto">
-                  //           <p className="w-full text-4xl font-bold">
-                  //             {appointments
-                  //               ? appointments
-                  //                   .find(
-                  //                     (appt) => appt._id === item.appointment_id
-                  //                   )
-                  //                   .appointment_slot.start_time.slice(11, 16)
-                  //               :
-                  //                 "...loading"}
-                  //           </p>
-                  //           <p className="w-full">
-                  //             <span className="font-bold">Date: </span>
-                  //             {appointments
-                  //               ? appointments
-                  //                   .find(
-                  //                     (appt) => appt._id === item.appointment_id
-                  //                   )
-                  //                   .appointment_slot.start_time.slice(0, 10)
-                  //               : "...loading"}
-                  //           </p>
-                  //           <p className="w-full">
-                  //             <span className="font-bold">Doctor: </span>
-                  //             {doctors && appointments
-                  //               ? doctors.find(
-                  //                   (doc) =>
-                  //                     doc._id ===
-                  //                     appointments.find(
-                  //                       (appt) => appt._id === item.appointment_id
-                  //                     ).doctor_id
-                  //                 ).first_name
-                  //               : "...loading"}
-                  //           </p>
-                  //           <div>
-                  //             <button
-                  //               appt={item.appointment_id}
-                  //               id={item._id}
-                  //               onClick={handleEditButtonClick}
-                  //               className="bg-[#d6c44e] hover:bg-[#e2d687] text-gray-100 font-bold py-2 px-6 rounded-md mt-2 mb-2 mx-[1rem]"
-                  //             >
-                  //               Edit
-                  //             </button>
-                  //             <button
-                  //               appt={item.appointment_id}
-                  //               id={item._id}
-                  //               onClick={handleDeleteButtonClick}
-                  //               className="bg-[#d25c5c] hover:bg-[#e49292] text-gray-100 font-bold py-2 px-6 rounded-md mt-2 mb-2 mx-[1rem]"
-                  //             >
-                  //               Delete
-                  //             </button>
-                  //           </div>
-                  //         </div>
-                  //       </li>
-                  //     );
-                  //   })
+                 ? myAppointments.map((item, index) => {
+                      return (
+                        <li
+                          className="border py-4 my-4 max-w-[700px] mx-auto rounded-lg bg-white shadow-md hover:bg-gray-100 text-black hover:text-black"
+                          key={index}
+                        >
+                          <div className="mx-auto">
+                            <p className="w-full text-4xl font-bold">
+                              {appointments
+                                ? appointments
+                                    .find(
+                                      (appt) => appt._id === item.appointment_id
+                                    )
+                                    .appointment_slot.start_time.slice(11, 16)
+                                :
+                                  "...loading"}
+                            </p>
+                            <p className="w-full">
+                              <span className="font-bold">Date: </span>
+                              {appointments
+                                ? appointments
+                                    .find(
+                                      (appt) => appt._id === item.appointment_id
+                                    )
+                                    .appointment_slot.start_time.slice(0, 10)
+                                : "...loading"}
+                            </p>
+                            <p className="w-full">
+                              <span className="font-bold">Doctor: </span>
+                              {doctors && appointments
+                                ? doctors.find(
+                                    (doc) =>
+                                      doc._id ===
+                                      appointments.find(
+                                        (appt) => appt._id === item.appointment_id
+                                      ).doctor_id
+                                  ).first_name
+                                : "...loading"}
+                            </p>
+                            <div>
+                              <button
+                                appt={item.appointment_id}
+                                id={item._id}
+                                onClick={handleEditButtonClick}
+                                className="bg-[#d6c44e] hover:bg-[#e2d687] text-gray-100 font-bold py-2 px-6 rounded-md mt-2 mb-2 mx-[1rem]"
+                              >
+                                Edit
+                              </button>
+                              <button
+                                appt={item.appointment_id}
+                                id={item._id}
+                                onClick={handleDeleteButtonClick}
+                                className="bg-[#d25c5c] hover:bg-[#e49292] text-gray-100 font-bold py-2 px-6 rounded-md mt-2 mb-2 mx-[1rem]"
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          </div>
+                        </li>
+                      );
+                    }) :
                   "Loading..."}
             </ul>
           </div>
