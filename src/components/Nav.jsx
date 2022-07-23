@@ -5,12 +5,11 @@ import { useUser } from "./auth/useUser";
 import { message } from "antd";
 import { useToken } from "./auth/useToken";
 
-
 const Nav = () => {
   const [nav, setNav] = useState(false);
   const [token, setToken] = useToken();
-  const navigator = useNavigate()
-  
+  const navigator = useNavigate();
+
   const handleNav = () => {
     setNav(!nav);
   };
@@ -23,7 +22,9 @@ const Nav = () => {
         Accept: "application/json",
         "Content-Type": " application/json",
       },
-      body: JSON.stringify({ refreshToken: `${localStorage.getItem('refreshToken')}` }), // is this the right token to send? 
+      body: JSON.stringify({
+        refreshToken: `${localStorage.getItem("refreshToken")}`,
+      }), // is this the right token to send?
     })
       .then((res) => res.json())
       .then((data) => {
@@ -33,15 +34,15 @@ const Nav = () => {
         console.log(err.message);
         message.error(err.message);
       });
-    
+
     // return to homepage
-    navigator("/")
-    
+    navigator("/");
+
     // clear storage and reset tokens
-    setToken('')
-    localStorage.removeItem("token")
-    localStorage.removeItem("refreshToken")
-  };  
+    setToken("");
+    localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
+  };
 
   return (
     <div className="w-full bg-[#f0edeb]">
@@ -97,13 +98,36 @@ const Nav = () => {
             Clinic Concierge.
           </h1>
           <ul className="pt-12 pl-6 uppercase">
-            <li className="p-4 border-b border-gray-600">Home</li>
-            <li className="p-4 border-b border-gray-600 flex-shrink-0">
-              About us
+            <li className="p-4 border-b border-gray-400">
+              <Link to="/">Home</Link>
             </li>
-            <li className="p-4 border-b border-gray-600">Doctors</li>
-            <li className="p-4 border-b border-gray-600">Bookings</li>
-            <li className="p-4">Contact</li>
+            <li className="p-4 border-b border-gray-400 flex-shrink-0">
+              <Link to="/about">About us</Link>
+            </li>
+            <li className="p-4 border-b border-gray-400">
+              <Link to="/doctors">Doctors</Link>
+            </li>
+            <li className="p-4 border-b border-gray-400">
+              <Link to="/bookings">Bookings</Link>
+            </li>
+            <li className="p-4 border-b border-gray-400">
+              <Link to="/my-appointments">My appts</Link>
+            </li>
+            <li className="p-4 border-b border-gray-400">
+              <Link to="/contact">Contact</Link>
+            </li>
+            <li className="p-4 border-b border-gray-400">
+              <Link to="/register">Register</Link>
+            </li>
+            <li className="p-4 border-b border-gray-400">
+              {localStorage.getItem("token") ? (
+                <Link onClick={logOut} to="/">
+                  Logout
+                </Link>
+              ) : (
+                <Link to="/login">Login</Link>
+              )}
+            </li>
           </ul>
         </div>
       </div>
