@@ -12,6 +12,7 @@ import PageNotFound from "./pages/PageNotFound";
 import Footer from "./Footer";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import PatientProfile from "./pages/PatientProfile";
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const App = () => {
           }
         />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/profile" element={<PatientProfile />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<PageNotFound />} />

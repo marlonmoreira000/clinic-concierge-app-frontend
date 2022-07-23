@@ -18,9 +18,7 @@ const Login = () => {
       if (!response.data.error) {
         message.success(response.data.message);
         setToken(response.data.accessToken);
-        // console.log("response data", response.data)
         localStorage.setItem("refreshToken", response.data.refreshToken);
-
         navigate("/");
       } else {
         message.error(response.data.message);
