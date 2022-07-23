@@ -10,7 +10,7 @@ const MyAppointments = () => {
   const [myAppointments, setMyAppointments] = useState(false);
   const [doctors, setDoctors] = useState(false);
   const [deleteButtonClick, setDeleteButtonClick] = useState(false);
-  const [token, setToken] = useToken()
+  const [token, setToken] = useToken();
   const nav = useNavigate();
 
   useEffect(() => {
@@ -73,12 +73,14 @@ const MyAppointments = () => {
     // delete booking using id
     fetch(
       `https://clinic-concierge.herokuapp.com/api/v1/bookings/${bookingId}`,
-      { method: "DELETE",
+      {
+        method: "DELETE",
         headers: {
           Accept: "application/json",
           "Content-Type": " application/json",
-          authorization: `Bearer ${token}`
-      } }
+          authorization: `Bearer ${token}`,
+        },
+      }
     )
       .then(() => {
         message.success("Your appointment was deleted.");
@@ -91,9 +93,9 @@ const MyAppointments = () => {
   };
 
   const handleEditButtonClick = (e) => {
-    const appointmentId = e.target.attributes.appt.value
+    const appointmentId = e.target.attributes.appt.value;
     //   navigate to the appointments page
-    nav(`/bookings/${appointmentId}`)
+    nav(`/bookings/${appointmentId}`);
     console.log(appointmentId);
     // present them with a button (confirm changes)
     // when button is pressed, update the appointment
@@ -116,15 +118,14 @@ const MyAppointments = () => {
                       >
                         <div className="mx-auto">
                           <p className="w-full text-4xl font-bold">
-                            {appointments ?
-                              // ? appointments
-                              //     .find(
-                              //       (appt) => appt._id === item.appointment_id
-                              //     )
-                              //     .appointment_slot.start_time.slice(11, 16)
-                              // console.log("appointments", appointments)
-                              console.log("myAppointments", myAppointments)
-                              : "...loading"}
+                            {appointments
+                              ? appointments
+                                  .find(
+                                    (appt) => appt._id === item.appointment_id
+                                  )
+                                  .appointment_slot.start_time.slice(11, 16)
+                              :
+                                "...loading"}
                           </p>
                           <p className="w-full">
                             <span className="font-bold">Date: </span>
