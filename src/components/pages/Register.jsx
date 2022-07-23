@@ -17,7 +17,9 @@ const Register = () => {
       // If registration successful, notify user and redirect to login, otherwise notify error
       if (!response.data.error) {
         message.success(response.data.message);
-        navigate("/login");
+        setToken(response.data.accessToken);
+        localStorage.setItem("refreshToken", response.data.refreshToken);
+        navigate("/profile");
       } else {
         message.error(response.data.message);
       }
