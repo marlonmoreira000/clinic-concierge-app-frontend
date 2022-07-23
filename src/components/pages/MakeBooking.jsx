@@ -4,12 +4,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import Header from "../Header";
 import { Input, message } from "antd";
 import { useToken } from "../auth/useToken";
+import { useUser } from "../auth/useUser";
 
 const MakeBooking = () => {
   // state
   const [appointment, setAppointment] = useState("");
   const [notes, setNotes] = useState("");
   const [bookings, setBookings] = useState("");
+  const user = useUser()
+
 
   // variables
   const { TextArea } = Input;
@@ -65,10 +68,9 @@ const MakeBooking = () => {
 
   const handleButtonClick = (e) => {
     // send POST request to make booking
+    // console.log("tokkkkkk", token)
     fetch(
-      `https://clinic-concierge.herokuapp.com/api/v1/bookings/${
-        appointment.booked ? appointment._id : ""
-      }`,
+      `https://clinic-concierge.herokuapp.com/api/v1/bookings/${appointment.booked ? appointment._id : ""}`,
       {
         method: appointment.booked ? "PUT" : "POST",
         headers: {
@@ -78,10 +80,11 @@ const MakeBooking = () => {
         },
         body: JSON.stringify({
           appointment_id: params.id,
-          patient_id: "62d037df1ceb4dda0110949c", // hard-coded value for MVP
+          patient_id: `${user._id}`,
           reason_for_visit: notes || "no notes provided",
         }),
       }
+      
     )
       .then((res) => {
         return res.json();

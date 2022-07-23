@@ -17,7 +17,7 @@ export const useUser = () => {
     if (!token) return null;
 
     // Otherwise return payload from token, identifying user
-    return getPayloadFromToken;
+    return getPayloadFromToken(token);
   });
 
   // If token changes, update user: makes sure user + token are in-sync whenever either is accessed

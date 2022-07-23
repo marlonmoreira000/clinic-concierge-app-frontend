@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useToken } from "../auth/useToken";
+import { useUser } from "../auth/useUser";
 
 const MyAppointments = () => {
   const [appointments, setAppointments] = useState(false);
@@ -12,6 +13,7 @@ const MyAppointments = () => {
   const [deleteButtonClick, setDeleteButtonClick] = useState(false);
   const [token, setToken] = useToken();
   const nav = useNavigate();
+  const user = useUser()
 
   useEffect(() => {
     // get doctors info from API
@@ -50,7 +52,7 @@ const MyAppointments = () => {
   useEffect(() => {
     // get my appointments from API
     fetch(
-      "https://clinic-concierge.herokuapp.com/api/v1/bookings?patientId=62d037df1ceb4dda0110949c",
+      `https://clinic-concierge.herokuapp.com/api/v1/bookings?patientId=${user._id}`,
       {
         headers: {
           Accept: "application/json",
