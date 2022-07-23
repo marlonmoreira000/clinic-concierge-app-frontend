@@ -116,12 +116,14 @@ const MyAppointments = () => {
                       >
                         <div className="mx-auto">
                           <p className="w-full text-4xl font-bold">
-                            {appointments
-                              ? appointments
-                                  .find(
-                                    (appt) => appt._id === item.appointment_id
-                                  )
-                                  .appointment_slot.start_time.slice(11, 16)
+                            {appointments ?
+                              // ? appointments
+                              //     .find(
+                              //       (appt) => appt._id === item.appointment_id
+                              //     )
+                              //     .appointment_slot.start_time.slice(11, 16)
+                              // console.log("appointments", appointments)
+                              console.log("myAppointments", myAppointments)
                               : "...loading"}
                           </p>
                           <p className="w-full">
