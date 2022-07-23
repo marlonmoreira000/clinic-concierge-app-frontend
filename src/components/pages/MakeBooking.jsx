@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Header from "../Header";
 import { Input, message } from "antd";
+import { useToken } from "../auth/useToken";
 
 const MakeBooking = () => {
   // state
@@ -14,11 +15,19 @@ const MakeBooking = () => {
   const { TextArea } = Input;
   const params = useParams();
   const nav = useNavigate();
+  const [token, setToken] = useToken()
 
   // effects
   useEffect(() => {
     fetch(
-      `https://clinic-concierge.herokuapp.com/api/v1/appointments/${params.id}`
+      `https://clinic-concierge.herokuapp.com/api/v1/appointments/${params.id}`,
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": " application/json",
+          authorization: `Bearer ${token}`,
+        },
+      }
     )
       .then((res) => res.json())
       .then((data) => setAppointment(data))
@@ -27,7 +36,13 @@ const MakeBooking = () => {
 
   useEffect(() => {
     // get bookings info from API
-    fetch("https://clinic-concierge.herokuapp.com/api/v1/bookings")
+    fetch("https://clinic-concierge.herokuapp.com/api/v1/bookings", {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": " application/json",
+        authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setBookings(data);
@@ -58,7 +73,8 @@ const MakeBooking = () => {
         method: appointment.booked ? "PUT" : "POST",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json",
+          "Content-Type": " application/json",
+          authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           appointment_id: params.id,

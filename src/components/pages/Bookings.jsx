@@ -75,6 +75,8 @@ const Bookings = () => {
       });
   }, [date, doctor]);
 
+  
+
   // functions
   const getDropdownItems = (data) => {
     let arr = [{ label: "All doctors", key: "0" }]; // set initial value

@@ -1,18 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "./auth/useUser";
 import { message } from "antd";
 import { useToken } from "./auth/useToken";
 
+
 const Nav = () => {
-  // state for navigation menu
   const [nav, setNav] = useState(false);
+  const [token, setToken] = useToken();
+  const navigator = useNavigate()
+  
   const handleNav = () => {
     setNav(!nav);
   };
-  const user = useUser();
-  const [token, setToken] = useToken();
 
   const logOut = (e) => {
     // perform logout API request
@@ -26,15 +27,21 @@ const Nav = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log("token", token);
         message.success(data.message);
       })
       .catch((err) => {
         console.log(err.message);
         message.error(err.message);
       });
-    // display confirmation message
-  };
+    
+    // return to homepage
+    navigator("/")
+    
+    // clear storage and reset tokens
+    setToken('')
+    localStorage.removeItem("token")
+    localStorage.removeItem("refreshToken")
+  };  
 
   return (
     <div className="w-full bg-[#f0edeb]">
@@ -67,7 +74,7 @@ const Nav = () => {
             <Link to="/register">Register</Link>
           </li>
           <li className="p-4">
-            {user ? (
+            {localStorage.getItem("token") ? (
               <Link onClick={logOut} to="/">
                 Logout
               </Link>

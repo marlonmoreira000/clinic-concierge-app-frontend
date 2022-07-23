@@ -3,17 +3,25 @@ import Header from "../Header";
 import { useEffect, useState } from "react";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
+import { useToken } from "../auth/useToken";
 
 const MyAppointments = () => {
   const [appointments, setAppointments] = useState(false);
   const [myAppointments, setMyAppointments] = useState(false);
   const [doctors, setDoctors] = useState(false);
   const [deleteButtonClick, setDeleteButtonClick] = useState(false);
+  const [token, setToken] = useToken()
   const nav = useNavigate();
 
   useEffect(() => {
     // get doctors info from API
-    fetch("https://clinic-concierge.herokuapp.com/api/v1/doctors/")
+    fetch("https://clinic-concierge.herokuapp.com/api/v1/doctors/", {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": " application/json",
+        authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setDoctors(data);
@@ -24,7 +32,13 @@ const MyAppointments = () => {
 
   useEffect(() => {
     // get doctors info from API
-    fetch("https://clinic-concierge.herokuapp.com/api/v1/appointments/")
+    fetch("https://clinic-concierge.herokuapp.com/api/v1/appointments/", {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": " application/json",
+        authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setAppointments(data);
@@ -36,7 +50,14 @@ const MyAppointments = () => {
   useEffect(() => {
     // get my appointments from API
     fetch(
-      "https://clinic-concierge.herokuapp.com/api/v1/bookings?patientId=62d037df1ceb4dda0110949c" // hard-coded patientId used for MVP
+      "https://clinic-concierge.herokuapp.com/api/v1/bookings?patientId=62d037df1ceb4dda0110949c",
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": " application/json",
+          authorization: `Bearer ${token}`,
+        },
+      }
     )
       .then((res) => res.json())
       .then((data) => {
@@ -52,7 +73,12 @@ const MyAppointments = () => {
     // delete booking using id
     fetch(
       `https://clinic-concierge.herokuapp.com/api/v1/bookings/${bookingId}`,
-      { method: "DELETE" }
+      { method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": " application/json",
+          authorization: `Bearer ${token}`
+      } }
     )
       .then(() => {
         message.success("Your appointment was deleted.");
