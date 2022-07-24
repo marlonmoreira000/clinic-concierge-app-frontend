@@ -13,7 +13,7 @@ import Footer from "./Footer";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import PatientProfile from "./pages/PatientProfile";
-import Doc from "./pages/Doc";
+import Appointment from "./pages/SetAppointment";
 
 const App = () => {
   return (
@@ -41,10 +41,10 @@ const App = () => {
           }
         />
         <Route
-          path="/doctorProfile"
+          path="/appointment"
           element={
             <PrivateRoute>
-              <Doc />
+              <Appointment />
             </PrivateRoute>
           }
         />
