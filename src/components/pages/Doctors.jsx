@@ -10,7 +10,11 @@ const Doctors = () => {
       <div>
         <div className="p-12 flex flex-wrap justify-center">
           <div className="p-4 w-[350px]">
-            <img className="w-[300px] shadow-lg rounded-md" src={doctor1} alt="" />
+            <img
+              className="w-[300px] shadow-lg rounded-md"
+              src={doctor1}
+              alt=""
+            />
             <div className="p-4">
               <h3 className="text-lg font-bold">Dr. Zimmak</h3>
               <p>
@@ -26,7 +30,11 @@ const Doctors = () => {
           </div>
 
           <div className="p-4 w-[350px]">
-            <img className="w-[300px] shadow-lg rounded-md" src={doctor2} alt="" />
+            <img
+              className="w-[300px] shadow-lg rounded-md"
+              src={doctor2}
+              alt=""
+            />
             <div className="p-4">
               <h3 className="text-lg font-bold">Dr. Yousaf</h3>
               <p>
@@ -42,7 +50,11 @@ const Doctors = () => {
           </div>
 
           <div className="p-4 w-[350px]">
-            <img className="w-[300px] shadow-lg rounded-md" src={doctor3} alt="" />
+            <img
+              className="w-[300px] shadow-lg rounded-md"
+              src={doctor3}
+              alt=""
+            />
             <div className="p-4">
               <h3 className="text-lg font-bold">Dr. Distel</h3>
               <p>
