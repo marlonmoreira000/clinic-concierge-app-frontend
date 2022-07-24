@@ -11,6 +11,7 @@ const MakeBooking = () => {
   const [appointment, setAppointment] = useState("");
   const [notes, setNotes] = useState("");
   const [bookings, setBookings] = useState("");
+  const [doctors, setDoctors] = useState("")
   const user = useUser()
 
 
@@ -34,6 +35,23 @@ const MakeBooking = () => {
     )
       .then((res) => res.json())
       .then((data) => setAppointment(data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    // get doctors info from API
+    fetch("https://clinic-concierge.herokuapp.com/api/v1/doctors/", {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": " application/json",
+        authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setDoctors(data);
+        console.log("doctors", data);
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -112,7 +130,10 @@ const MakeBooking = () => {
           <div>
             <h3 className="text-2xl font-bold pb-2">Appointment Details</h3>
             <p className="py-2">
-              <span className="font-bold">Patient name:</span> LeChamp McDoggus
+              <span className="font-bold">Doctor name:</span>{" "}
+              {(appointment && doctors)
+                ? doctors.find((doc) => doc._id === appointment.doctor_id).first_name
+                : "...loading"}
             </p>
             <p className="py-2">
               <span className="font-bold">Date/Time: </span>
@@ -130,7 +151,7 @@ const MakeBooking = () => {
           <div className="pt-6">
             <h3 className="text-2xl font-bold">Notes</h3>
             <TextArea
-                          showCount
+              showCount
               maxLength={200}
               value={notes}
               style={{
