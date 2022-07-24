@@ -5,7 +5,6 @@ import TimeslotCard from "../TimeslotCard";
 import { useToken } from "../auth/useToken";
 
 const Bookings = () => {
-  // dynamic data ("state")
   const [doctors, setDoctors] = useState(false);
   const [date, setDate] = useState("");
   const [doctor, setDoctor] = useState(""); // represents doctor selected on dropdown
@@ -52,6 +51,7 @@ const Bookings = () => {
   }, []);
 
   useEffect(() => {
+    // filter the appointments based on date/doctor selection
     const fromDate = new Date(date);
     const toDate = new Date(date);
     toDate.setDate(toDate.getDate() + 1);
@@ -79,7 +79,7 @@ const Bookings = () => {
 
   // functions
   const getDropdownItems = (data) => {
-    let arr = [{ label: "All doctors", key: "0" }]; // set initial value
+    let arr = [{ label: "All doctors", key: "0" }] // set initial value
     // let arr = []; // set initial value
     data.forEach((item, index) => {
       arr.push({
@@ -103,7 +103,6 @@ const Bookings = () => {
 
   const menu = <Menu onClick={handleDropdownClick} items={dropdownItems} />;
 
-  // return statement
   return (
     <>
       <Header text="Bookings." />

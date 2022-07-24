@@ -80,13 +80,11 @@ const MakeBooking = () => {
 
   // functions
   const handleNotesChange = (e) => {
-    // console.log(e.target.value);
     setNotes(e.target.value);
   };
 
   const handleButtonClick = (e) => {
     // send POST request to make booking
-    // console.log("tokkkkkk", token)
     fetch(
       `https://clinic-concierge.herokuapp.com/api/v1/bookings/${appointment.booked ? appointment._id : ""}`,
       {
