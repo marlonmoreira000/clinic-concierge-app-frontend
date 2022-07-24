@@ -13,6 +13,7 @@ import Footer from "./Footer";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import PatientProfile from "./pages/PatientProfile";
+import Doc from "./pages/Doc";
 
 const App = () => {
   return (
@@ -36,6 +37,14 @@ const App = () => {
           element={
             <PrivateRoute>
               <MyAppointments />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/doctorProfile"
+          element={
+            <PrivateRoute>
+              <Doc />
             </PrivateRoute>
           }
         />
