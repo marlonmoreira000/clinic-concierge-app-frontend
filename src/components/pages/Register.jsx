@@ -6,7 +6,6 @@ import { useToken } from "../auth/useToken";
 import Header from "../Header";
 
 const Register = () => {
-  // const [token, setToken] = useToken();
   const navigate = useNavigate();
   const [token, setToken] = useToken();
 
