@@ -11,6 +11,8 @@ import axios from "axios";
 import { useToken } from "../auth/useToken";
 import { useUser } from "../auth/useUser";
 
+const user = useUser
+
 const Appointment = () => {
   const [token, setToken] = useToken();
   const user = useUser();
@@ -27,20 +29,31 @@ const Appointment = () => {
 
   const onFinish = async (fieldsValue) => {
     const rangeTimeValue = fieldsValue["range-time-picker"];
-    const values = {
-      ...fieldsValue,
-      "range-time-picker": [
-        rangeTimeValue[0].format("YYYY-MM-DD HH:mm"),
-        rangeTimeValue[1].format("YYYY-MM-DD HH:mm"),
-      ],
-    };
+    // const values = {
+    //   ...fieldsValue,
+    //   "range-time-picker": [
+    //     rangeTimeValue[0].format("YYYY-MM-DD HH:mm"),
+    //     rangeTimeValue[1].format("YYYY-MM-DD HH:mm"),
+    //   ],
+    // };
+
+    console.log("FieldsValue: %O" + fieldsValue);
+
+    const fromDate = new Date(rangeTimeValue[0].format("YYYY-MM-DD HH:mm:ss"));
+    const toDate = new Date(rangeTimeValue[1].format("YYYY-MM-DD HH:mm:ss"));
+
+    const fromTime = fromDate;
+    const toTime = toDate;
+    console.log(fromTime, toTime);
+    
+    
+    console.log(user.roles[0])
+
+    // console.log(`Values: %O${values}`);
 
     const request = {
-      doctor_id: user.id,
-      appointment_slot: {
-        start_time: values[0],
-        end_time: values[1],
-      },
+      start_time: fromTime,
+      end_time: toTime,
     };
     try {
       const response = await axios.post(
@@ -48,9 +61,11 @@ const Appointment = () => {
         request,
         {
           headers: {
+            Accept: "application/json",
             authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
-          values,
+          // values,
         }
       );
       // If registration successful, notify user and redirect to login, otherwise notify error
@@ -66,7 +81,7 @@ const Appointment = () => {
         message.error("Something went wrong");
       }
     }
-    console.log("Received values of form: ", values);
+    // console.log("Received values of form: ", values);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -76,7 +91,7 @@ const Appointment = () => {
 
   return (
     <>
-      <Header text="Create New Available Appointment" />
+      <Header text="Create New Availability" />
       <div className="bg-[#f0edeb] py-8">
         <div className="p-12 flex flex-col justify-center max-w-[400px] mx-auto border border-gray-300 rounded-lg bg-white">
           <Form
@@ -87,7 +102,7 @@ const Appointment = () => {
           >
             <Form.Item
               name="range-time-picker"
-              label="RangePicker[showTime]"
+              label="Set Appointment Time"
               {...rangeConfig}
             >
               <RangePicker showTime format="YYYY-MM-DD HH:mm" />
