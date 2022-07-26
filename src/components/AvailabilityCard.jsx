@@ -1,12 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { message } from "antd";
 import { useToken } from "./auth/useToken";
-import { useState } from "react";
 
 const AvailabilityCard = (params) => {
   const [token, setToken] = useToken();
-  const [deleteButtonClick, setDeleteButtonClick] = useState(false);
   const handleDeleteButtonClick = (e) => {
     const appointmentId = e.target.id;
     fetch(
@@ -18,11 +15,11 @@ const AvailabilityCard = (params) => {
           "Content-Type": " application/json",
           authorization: `Bearer ${token}`,
         },
-      }, []
+      }
     )
       .then(() => {
-        message.success("Timeslot deleted.");
-        setDeleteButtonClick(deleteButtonClick ? false : true); // this triggers rerender of myAppointments
+          message.success("Timeslot deleted.");
+          window.location.reload(false);
       })
       .catch((err) => {
         console.log(err);
@@ -30,7 +27,7 @@ const AvailabilityCard = (params) => {
       });
   };
 
-  const { item, index, } = params;
+  const { item, index } = params;
   return (
     <li
       key={index}
@@ -56,7 +53,6 @@ const AvailabilityCard = (params) => {
         </button>
       </div>
     </li>
-    // </Link>
   );
 };
 
