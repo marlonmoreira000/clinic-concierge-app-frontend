@@ -1,9 +1,10 @@
 import { DatePicker, Button, Dropdown, Menu } from "antd";
 import React, { useState, useEffect } from "react";
 import Header from "../Header";
-import TimeslotCard from "../TimeslotCard";
+import AvailabilityCard from "../AvailabilityCard";
 import { useToken } from "../auth/useToken";
 import { useUser } from "../auth/useUser";
+
 
 const Timeslots = () => {
   const [doctors, setDoctors] = useState(false);
@@ -71,7 +72,7 @@ const Timeslots = () => {
               {appointments
                 ? appointments.map((item, index) => {
                     return (
-                      <TimeslotCard
+                      <AvailabilityCard
                         item={item}
                         index={index}
                         doctors={doctors}
