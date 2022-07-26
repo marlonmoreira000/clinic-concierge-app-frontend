@@ -14,6 +14,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import PatientProfile from "./pages/PatientProfile";
 import Appointment from "./pages/SetAppointment";
+import Timeslots from "./pages/MyTimeslots";
 
 const App = () => {
   return (
@@ -41,7 +42,7 @@ const App = () => {
           }
         />
         <Route
-          path="/appointment"
+          path="/appointments"
           element={
             <PrivateRoute>
               <Appointment />
@@ -53,6 +54,14 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<PageNotFound />} />
+        <Route
+          path="/times"
+          element={
+            <PrivateRoute>
+              <Timeslots />
+            </PrivateRoute>
+          }
+        />
       </Routes>
       <Footer />
     </BrowserRouter>

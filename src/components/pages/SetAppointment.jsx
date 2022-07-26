@@ -42,7 +42,7 @@ const Appointment = () => {
       );
       // Notify on success/failure
       if (!response.data.error) {
-        message.success('Time slot added!');
+        message.success("Time slot added!");
       } else {
         message.error(response.data.message);
       }
@@ -80,9 +80,7 @@ const Appointment = () => {
               <RangePicker showTime format="YYYY-MM-DD HH:mm" />
             </Form.Item>
             <div className="flex flex-wrap justify-center pt-4">
-              <button
-                className="w-full bg-[#23375d] hover:bg-[#334b88] text-gray-100 py-3 px-6 rounded-md mx-4"
-              >
+              <button className="w-full bg-[#23375d] hover:bg-[#334b88] text-gray-100 py-3 px-6 rounded-md mx-4">
                 Submit
               </button>
             </div>
