@@ -33,7 +33,7 @@ const MyAppointments = () => {
   }, []);
 
   useEffect(() => {
-    // get doctors info from API
+    // get appointments info from API
     fetch("https://clinic-concierge.herokuapp.com/api/v1/appointments/", {
       headers: {
         Accept: "application/json",
@@ -50,7 +50,7 @@ const MyAppointments = () => {
   }, []);
 
   useEffect(() => {
-    // get my appointments from API
+    // get user bookings from API
     fetch(
       `https://clinic-concierge.herokuapp.com/api/v1/bookings?userId=${user._id}`,
       {
@@ -77,9 +77,7 @@ const MyAppointments = () => {
   }, [deleteButtonClick]);
 
   const handleDeleteButtonClick = (e) => {
-    //   get booking id
     const bookingId = e.target.id;
-    // delete booking using id
     fetch(
       `https://clinic-concierge.herokuapp.com/api/v1/bookings/${bookingId}`,
       {
@@ -103,11 +101,8 @@ const MyAppointments = () => {
 
   const handleEditButtonClick = (e) => {
     const appointmentId = e.target.attributes.appt.value;
-    //   navigate to the appointments page
     nav(`/bookings/${appointmentId}`);
     console.log(appointmentId);
-    // present them with a button (confirm changes)
-    // when button is pressed, update the appointment
   };
 
   return (
