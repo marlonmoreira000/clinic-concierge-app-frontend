@@ -1,12 +1,8 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
-import fetch from "node-fetch";
 import TimeslotCard from "../TimeslotCard";
-import Bookings from "../pages/Bookings";
 import { BrowserRouter } from "react-router-dom";
-
-global.fetch = fetch;
 
 const mockItem = {
   _id: 8675309,
