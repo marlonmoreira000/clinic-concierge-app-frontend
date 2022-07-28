@@ -13,6 +13,8 @@ import Footer from "./Footer";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import PatientProfile from "./pages/PatientProfile";
+import Appointment from "./pages/SetAppointment";
+import Timeslots from "./pages/MyTimeslots";
 
 const App = () => {
   return (
@@ -39,11 +41,27 @@ const App = () => {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/appointments"
+          element={
+            <PrivateRoute>
+              <Appointment />
+            </PrivateRoute>
+          }
+        />
         <Route path="/contact" element={<Contact />} />
         <Route path="/profile" element={<PatientProfile />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<PageNotFound />} />
+        <Route
+          path="/times"
+          element={
+            <PrivateRoute>
+              <Timeslots />
+            </PrivateRoute>
+          }
+        />
       </Routes>
       <Footer />
     </BrowserRouter>
