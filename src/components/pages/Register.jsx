@@ -19,8 +19,6 @@ const Register = () => {
         setToken(response.data.accessToken);
         localStorage.setItem("refreshToken", response.data.refreshToken);
         navigate("/profile");
-      } else {
-        message.error(response.data.message);
       }
     } catch (error) {
       if (error.response.data.message) {
@@ -88,7 +86,7 @@ const Register = () => {
                 Register
               </button>
               <Link className="anchor pt-4" to="/login">
-                  Sign in
+                Sign in
               </Link>
             </div>
           </Form>

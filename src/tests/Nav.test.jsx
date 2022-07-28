@@ -1,9 +1,9 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, beforeEach } from "vitest";
-import Nav from "../Nav";
 import { BrowserRouter } from "react-router-dom";
-import App from "../App";
+import Nav from "../components/Nav";
+import App from "../components/App";
 import userEvent from "@testing-library/user-event";
 
 describe("Nav", () => {
@@ -33,8 +33,4 @@ describe("Nav function", () => {
     // Doctors.jsx should be the only page that displays three separate images, thereby proving navigation to correct page
     expect(screen.getAllByRole("img").length).toEqual(3);
   })
-  
-  it('Provides logout function', () => {
-    
-  });
 });

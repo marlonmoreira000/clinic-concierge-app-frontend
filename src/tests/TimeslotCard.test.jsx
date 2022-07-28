@@ -1,7 +1,8 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
-import AvailabilityCard from "../AvailabilityCard";
+import TimeslotCard from "../components/TimeslotCard";
+import { BrowserRouter } from "react-router-dom";
 
 const mockItem = {
   _id: 8675309,
@@ -29,12 +30,20 @@ const mockDoc = {
 describe("Timeslot Card", async () => {
   beforeEach(() => {
     render(
-        <AvailabilityCard item={mockItem} doctors={[mockDoc]} index={1} />
+      <BrowserRouter>
+        <TimeslotCard item={mockItem} doctors={[mockDoc]} index={1} />
+      </BrowserRouter>
     );
   });
 
-  it("Includes delete button", () => {
-    expect(screen.getByRole("button", { name: "Delete" })).toBeInTheDocument();
+  it("Links to details for its represented appointment", () => {
+    expect(
+      screen.getByRole("link", { target: "bookings/8675309" })
+    ).toBeInTheDocument();
+  });
+
+  it("Displays provided doctor name with appointment", () => {
+    expect(screen.getByText("Nick")).toBeInTheDocument();
   });
 
   it("Displays provided date", () => {

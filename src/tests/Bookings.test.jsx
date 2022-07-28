@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { beforeEach } from "vitest";
 import { describe, it, expect } from "vitest";
 import fetch from "node-fetch";
-import Bookings from "../pages/Bookings";
+import Bookings from "../components/pages/Bookings";
 
 global.fetch = fetch;
 
