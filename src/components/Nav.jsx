@@ -10,8 +10,7 @@ const Nav = () => {
   const [token, setToken] = useToken();
   const navigator = useNavigate();
 
-  const user = useUser();
-  console.log(user)
+  const user = useUser()
 
   const handleNav = () => {
     setNav(!nav);
@@ -66,24 +65,18 @@ const Nav = () => {
           <li className="p-4">
             <Link to="/bookings">Bookings</Link>
           </li>
-          {
-            <li className="p-4 flex-shrink-0">
-              {user.roles[1] == "doctor" ? (
-                <Link to="/appointments">My appts</Link>
-              ) : (
-                <Link to="/my-appointments">My appts</Link>
-              )}
-            </li>
-          }
+          <li className="p-4 flex-shrink-0">
+            {user && user.roles[1] == "doctor" ? (
+              <Link to="/times">Availability</Link>
+            ) : (
+              <Link to="/my-appointments">My appts</Link>
+            )}
+          </li>
           <li className="p-4">
             <Link to="/contact">Contact</Link>
           </li>
           <li className="p-4">
-            {localStorage.getItem("token") ? (
-              ""
-            ) : (
-              <Link to="/register">Register</Link>
-            )}
+            <Link to="/register">Register</Link>
           </li>
           <li className="p-4">
             {localStorage.getItem("token") ? (

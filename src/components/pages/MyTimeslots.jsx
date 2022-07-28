@@ -3,6 +3,7 @@ import Header from "../Header";
 import AvailabilityCard from "../AvailabilityCard";
 import { useToken } from "../auth/useToken";
 import { useUser } from "../auth/useUser";
+import { useNavigate } from "react-router-dom";
 
 
 const Timeslots = () => {
@@ -10,6 +11,11 @@ const Timeslots = () => {
   const [appointments, setAppointments] = useState(false);
   const [token, setToken] = useToken();
   const user = useUser();
+
+  const nav = useNavigate();
+  const handleButtonClick = (e) => {
+    nav("/appointments");
+  };
 
   useEffect(() => {
     fetch(
@@ -49,6 +55,12 @@ const Timeslots = () => {
                   })
                 : "Loading..."}
             </ul>
+            <button
+              onClick={handleButtonClick}
+              className="bg-[#23375d] hover:bg-[#334b88] text-gray-100 font-bold py-3 px-6 rounded-md my-[6rem]"
+            >
+              New Availability
+            </button>
           </div>
         </div>
       </div>
