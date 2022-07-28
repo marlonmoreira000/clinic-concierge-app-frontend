@@ -10,6 +10,8 @@ const Nav = () => {
   const [token, setToken] = useToken();
   const navigator = useNavigate();
 
+  const user = useUser()
+
   const handleNav = () => {
     setNav(!nav);
   };
@@ -63,11 +65,13 @@ const Nav = () => {
           <li className="p-4">
             <Link to="/bookings">Bookings</Link>
           </li>
-          {
-            <li className="p-4 flex-shrink-0">
+          <li className="p-4 flex-shrink-0">
+            {user && user.roles[1] == "doctor" ? (
+              <Link to="/times">Availability</Link>
+            ) : (
               <Link to="/my-appointments">My appts</Link>
-            </li>
-          }
+            )}
+          </li>
           <li className="p-4">
             <Link to="/contact">Contact</Link>
           </li>
@@ -111,7 +115,11 @@ const Nav = () => {
               <Link to="/bookings">Bookings</Link>
             </li>
             <li className="p-4 border-b border-gray-400">
-              <Link to="/my-appointments">My appts</Link>
+              {user && user.roles[1] == "doctor" ? (
+                <Link to="/times">Availability</Link>
+              ) : (
+                <Link to="/my-appointments">My appts</Link>
+              )}
             </li>
             <li className="p-4 border-b border-gray-400">
               <Link to="/contact">Contact</Link>
