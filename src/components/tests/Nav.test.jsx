@@ -18,7 +18,11 @@ describe("Nav", () => {
 
   it("Contains links to navigate the app", () => {
     expect(screen.getAllByText("Home")).toBeInTheDocument;
+    expect(screen.getAllByText("About us")).toBeInTheDocument;
     expect(screen.getAllByText("Doctors")).toBeInTheDocument;
+    expect(screen.getAllByText("Bookings")).toBeInTheDocument;
+    expect(screen.getAllByText("My appts")).toBeInTheDocument;
+    expect(screen.getAllByText("Contact")).toBeInTheDocument;
   });
 });
 
@@ -28,5 +32,9 @@ describe("Nav function", () => {
     await userEvent.click(screen.getAllByText("Doctors")[1]);
     // Doctors.jsx should be the only page that displays three separate images, thereby proving navigation to correct page
     expect(screen.getAllByRole("img").length).toEqual(3);
+  })
+  
+  it('Provides logout function', () => {
+    
   });
 });

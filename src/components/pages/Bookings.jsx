@@ -80,7 +80,6 @@ const Bookings = () => {
   // functions
   const getDropdownItems = (data) => {
     let arr = [{ label: "All doctors", key: "0" }] // set initial value
-    // let arr = []; // set initial value
     data.forEach((item, index) => {
       arr.push({
         label: <a id={item["_id"]}>{item["first_name"]}</a>,

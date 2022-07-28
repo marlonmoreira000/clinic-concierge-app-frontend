@@ -29,6 +29,10 @@ describe("Bookings", () => {
       .toBeInTheDocument;
   });
 
+  it('Displays loading text', () => { 
+    expect(screen.getByRole("list", { value: "Loading" })).toBeInTheDocument();
+  })
+
   //   it("Allows selection by doctor", async () => {
   //   // Confirm selection button exists
   //   expect(screen.getByRole("link", { name: "Christmas Ham" }))
