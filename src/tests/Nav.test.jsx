@@ -29,11 +29,11 @@ describe("Nav", () => {
   });
 });
 
-// describe("Nav function", () => {
-//   it("Allows users to navigate to different pages", async () => {
-//     render(<App />);
-//     fireEvent.click(screen.getAllByRole("link", { name: 'Doctors'})[1]);
+describe("Nav function", () => {
+  it("Allows users to navigate to different pages", async () => {
+    render(<App />);
+    fireEvent.click(screen.getAllByRole("link", { name: 'Doctors'})[1]);
     
-//     await expect(screen.getByText("Zimmak")).toBeInTheDocument
-//   })
-// });
+    await expect(screen.getByText("Zimmak")).toBeInTheDocument
+  })
+});
