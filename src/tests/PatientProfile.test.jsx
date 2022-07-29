@@ -59,8 +59,6 @@ describe("PatientProfile", () => {
       target: { value: "3000" },
     });
 
-    screen.debug();
-
     // Submit form to create profile
     fireEvent.click(screen.getByRole("button", { name: "Create Profile" }));
   });
@@ -106,8 +104,6 @@ describe("PatientProfile", () => {
     });
     fireEvent.click(genderField);
 
-    screen.debug();
-
     // Submit form to create profile
     fireEvent.click(screen.getByRole("button", { name: "Create Profile" }));
   });
@@ -144,8 +140,6 @@ describe("PatientProfile", () => {
       target: { value: "3000" },
     });
 
-    screen.debug();
-
     // Submit form to create profile
     fireEvent.click(screen.getByRole("button", { name: "Create Profile" }));
   });
@@ -181,8 +175,6 @@ describe("PatientProfile", () => {
     fireEvent.change(postcodeField, {
       target: { value: "3000" },
     });
-
-    screen.debug();
 
     // Submit form to create profile
     fireEvent.click(screen.getByRole("button", { name: "Create Profile" }));

@@ -41,8 +41,6 @@ describe("register", () => {
       target: { value: "Test@1234" },
     });
 
-    screen.debug();
-
     // Submit form to register
     fireEvent.click(screen.getByRole("button", { name: "Register" }));
 
@@ -67,8 +65,6 @@ describe("register", () => {
       target: { value: "Test@1234" },
     });
 
-    screen.debug();
-
     // Submit form to register
     fireEvent.click(screen.getByRole("button", { name: "Register" }));
 
@@ -92,8 +88,6 @@ describe("register", () => {
     fireEvent.change(passwordField, {
       target: { value: "Test@1234" },
     });
-
-    screen.debug();
 
     // Submit form to register
     fireEvent.click(screen.getByRole("button", { name: "Register" }));

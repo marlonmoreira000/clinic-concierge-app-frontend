@@ -41,7 +41,6 @@ describe("Login", () => {
       target: { value: "Test@1234" },
     });
 
-    screen.debug();
     expect(screen.getByLabelText("Password")).toBeInTheDocument;
 
     // Submit form to sign in
@@ -68,7 +67,6 @@ describe("Login", () => {
       target: { value: "Test@1234" },
     });
 
-    screen.debug();
     expect(screen.getByLabelText("Password")).toBeInTheDocument;
 
     // Submit form to sign in
@@ -95,7 +93,6 @@ describe("Login", () => {
       target: { value: "Test@1234" },
     });
 
-    screen.debug();
     expect(screen.getByLabelText("Password")).toBeInTheDocument;
 
     // Submit form to sign in
