@@ -32,8 +32,8 @@ describe("Nav", () => {
 describe("Nav function", () => {
   it("Allows users to navigate to different pages", async () => {
     render(<App />);
-    fireEvent.click(screen.getAllByRole("link", { name: 'Doctors'})[1]);
-    
-    await expect(screen.getByText("Zimmak")).toBeInTheDocument
+    await userEvent.click(screen.getAllByText("Doctors")[1]);
+    // Doctors.jsx should be the only page that displays three separate images, thereby proving navigation to correct page
+    expect(screen.getAllByRole("img").length).toEqual(2);
   })
 });

@@ -8,8 +8,8 @@ const mockItem = {
   _id: 8675309,
   doctor_id: 8675309,
   appointment_slot: {
-    start_time: "2022-08-08 14:30:00",
-    end_time: "2022-08-08 15:00:00",
+    start_time: "2022-08-08T03:30:00.000Z",
+    end_time: "2022-08-08T04:00:00.000Z",
   },
   booked: false,
 };
@@ -43,14 +43,14 @@ describe("Timeslot Card", async () => {
   });
 
   it("Displays provided doctor name with appointment", () => {
-    expect(screen.getByText("Oz")).toBeInTheDocument();
+    expect(screen.getByText("Nick Oz")).toBeInTheDocument();
   });
 
   it("Displays provided date", () => {
-    expect(screen.getByText("2022-08-08")).toBeInTheDocument();
+    expect(screen.getByText("08.08.2022")).toBeInTheDocument();
   });
 
   it("Displays provided start time", () => {
-    expect(screen.getByText("14:30")).toBeInTheDocument();
+    expect(screen.getByText("1:30 PM")).toBeInTheDocument();
   });
 });

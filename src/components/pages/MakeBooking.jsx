@@ -86,9 +86,7 @@ const MakeBooking = () => {
   const handleButtonClick = (e) => {
     // send POST request to make booking
     fetch(
-      `https://clinic-concierge.herokuapp.com/api/v1/bookings/${
-        appointment.booked ? appointment._id : ""
-      }`,
+      `https://clinic-concierge.herokuapp.com/api/v1/bookings/${appointment.booked ? appointment._id : ""}`,
       {
         method: appointment.booked ? "PUT" : "POST",
         headers: {
@@ -102,10 +100,8 @@ const MakeBooking = () => {
         }),
       }
     ).then((res) => {
-      console.log("res: ", res);
       return res.json();
     }).then((data) => {
-      console.log("data: ", data);
       if (data.error) {
         message.error(data.message)
       } else {
@@ -131,7 +127,7 @@ const MakeBooking = () => {
             <p className="py-2">
               <span className="font-bold">Doctor name:</span>{" "}
               {(appointment && doctors)
-                ? doctors.find((doc) => doc._id === appointment.doctor_id).last_name + " " + doctors.find((doc) => doc._id === appointment.doctor_id).last_name
+                ? doctors.find((doc) => doc._id === appointment.doctor_id).first_name + " " + doctors.find((doc) => doc._id === appointment.doctor_id).last_name
                 : "...loading"}
             </p>
             <p className="py-2">

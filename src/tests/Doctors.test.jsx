@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import fetch from "node-fetch";
 import { beforeEach } from "vitest";
 import { describe, it, expect } from "vitest";
+import { waitFor } from "@testing-library/react";
 import Doctors from "../components/pages/Doctors";
 
 global.fetch = fetch;
@@ -18,12 +19,11 @@ describe("Doctors", () => {
     );
   });
 
-  it("Displays information for all three doctors", async () => {
-    await expect(screen.getByText("Dr. Zimmak"))
-      .toBeInTheDocument;
-    await expect(screen.getByText("Dr. Yousaf"))
-      .toBeInTheDocument;
-    await expect(screen.getByText("Dr. Distel"))
-      .toBeInTheDocument;
+  it("Displays information for all two doctors", async () => {
+    await waitFor(() => {
+      expect(screen.getAllByRole("img").length).toEqual(2);
+      expect(screen.getByText("Dr. John Doe")).toBeInTheDocument;
+      expect(screen.getByText("Dr. Hans Zimmak")).toBeInTheDocument;
+    });
   });
 });

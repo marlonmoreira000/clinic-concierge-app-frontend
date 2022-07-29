@@ -26,7 +26,7 @@ const Nav = () => {
       },
       body: JSON.stringify({
         token: `${localStorage.getItem("refreshToken")}`,
-      }), 
+      }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -116,7 +116,7 @@ const Nav = () => {
               <Link to="/bookings">Bookings</Link>
             </li>
             <li className="p-4 border-b border-gray-400">
-              {user && user.roles[0] == "doctor" ? (
+              {user && (user.roles[0] == ("doctor") || user.roles[1] == ("doctor")) ? (
                 <Link to="/times">Availability</Link>
               ) : (
                 <Link to="/my-appointments">My appts</Link>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Form, DatePicker, message } from "antd";
 import Header from "../Header";
 import axios from "axios";
@@ -16,6 +17,7 @@ const Appointment = () => {
       },
     ],
   };
+  const nav = useNavigate();
 
   const onFinish = async (fieldsValue) => {
     // Format values from time-picker form
@@ -42,6 +44,7 @@ const Appointment = () => {
       );
       // Notify on success/failure
       if (!response.data.error) {
+        nav("/times");
         message.success("Time slot added!");
       } else {
         message.error(response.data.message);
@@ -57,7 +60,7 @@ const Appointment = () => {
 
   //Notify user if form submission fails
   const onFinishFailed = (errorInfo) => {
-    console.log(`Failed: ${errorInfo}`);
+    console.log("Failed: %O", errorInfo);
     message.error("Something went wrong, ${errorInfo}");
   };
 
