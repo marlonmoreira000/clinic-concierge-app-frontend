@@ -134,7 +134,7 @@ const MakeBooking = () => {
               <span className="font-bold">Doctor name:</span>{" "}
               {appointment && doctors
                 ? doctors.find((doc) => doc._id === appointment.doctor_id)
-                    .first_name
+                    .last_name
                 : "...loading"}
             </p>
             <p className="py-2">

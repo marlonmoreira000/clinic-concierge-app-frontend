@@ -20,7 +20,7 @@ const TimeslotCard = (params) => {
           <p className="w-full">
             <span className="font-bold">Doctor: </span>
             {doctors
-              ? doctors.find((doc) => doc._id === item.doctor_id).first_name
+              ? doctors.find((doc) => doc._id === item.doctor_id).last_name
               : "...loading"}
           </p>
         </div>

@@ -80,7 +80,7 @@ const Bookings = () => {
     let arr = [{ label: "All doctors", key: "0" }]; // set initial value
     data.forEach((item, index) => {
       arr.push({
-        label: <a id={item["_id"]}>{item["first_name"]}</a>,
+        label: <a id={item["_id"]}>{item["last_name"]}</a>,
         key: `${index + 1}`,
       });
     });
