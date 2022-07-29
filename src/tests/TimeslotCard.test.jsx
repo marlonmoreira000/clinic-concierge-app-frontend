@@ -43,7 +43,7 @@ describe("Timeslot Card", async () => {
   });
 
   it("Displays provided doctor name with appointment", () => {
-    expect(screen.getByText("Nick")).toBeInTheDocument();
+    expect(screen.getByText("Oz")).toBeInTheDocument();
   });
 
   it("Displays provided date", () => {
