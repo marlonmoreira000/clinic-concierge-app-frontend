@@ -14,13 +14,7 @@ const Doctors = () => {
             <div className="p-4">
               <h3 className="text-lg font-bold">Dr. Zimmak</h3>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Quibusdam, odio ut! Obcaecati maiores ipsa eligendi alias magnam
-                amet dicta quibusdam officia illo dolore quaerat laborum, labore
-                at, repellendus voluptas! Adipisci, aliquam repellendus minus
-                doloremque voluptate iusto, repudiandae ex officiis tenetur
-                asperiores quibusdam tempora ratione dolorum et fugiat,
-                molestiae non at?
+                Dr Zimmak has been serving the community as a doctor for over two decades. She is a founding clinician at our practice, with a particular focus on women's health issues.
               </p>
             </div>
           </div>
@@ -30,13 +24,7 @@ const Doctors = () => {
             <div className="p-4">
               <h3 className="text-lg font-bold">Dr. Yousaf</h3>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Quibusdam, odio ut! Obcaecati maiores ipsa eligendi alias magnam
-                amet dicta quibusdam officia illo dolore quaerat laborum, labore
-                at, repellendus voluptas! Adipisci, aliquam repellendus minus
-                doloremque voluptate iusto, repudiandae ex officiis tenetur
-                asperiores quibusdam tempora ratione dolorum et fugiat,
-                molestiae non at?
+                Dr Yousaf brings 15 years of experience in General Practice to our clinic. He has a particular focus on supporting the health needs of young families.
               </p>
             </div>
           </div>
@@ -46,13 +34,7 @@ const Doctors = () => {
             <div className="p-4">
               <h3 className="text-lg font-bold">Dr. Distel</h3>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Quibusdam, odio ut! Obcaecati maiores ipsa eligendi alias magnam
-                amet dicta quibusdam officia illo dolore quaerat laborum, labore
-                at, repellendus voluptas! Adipisci, aliquam repellendus minus
-                doloremque voluptate iusto, repudiandae ex officiis tenetur
-                asperiores quibusdam tempora ratione dolorum et fugiat,
-                molestiae non at?
+                Dr Distel has been practicing medicine for 5 years, with a focus on mens' sexual and mental health issues.
               </p>
             </div>
           </div>
