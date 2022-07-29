@@ -5,6 +5,7 @@ import { message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useToken } from "../auth/useToken";
 import { useUser } from "../auth/useUser";
+import moment from "moment";
 
 const MyAppointments = () => {
   const [appointments, setAppointments] = useState(false);
@@ -123,22 +124,22 @@ const MyAppointments = () => {
                       <div className="mx-auto">
                         <p className="w-full text-4xl font-bold">
                           {appointments
-                            ? appointments
+                            ? moment(appointments
                               .find(
                                 (appt) => appt._id === item.appointment_id
                               )
-                              .appointment_slot.start_time.slice(11, 16)
+                              .appointment_slot.start_time).format('h:mm A')
                             :
                             "...loading"}
                         </p>
                         <p className="w-full">
                           <span className="font-bold">Date: </span>
                           {appointments
-                            ? appointments
+                            ? moment(appointments
                               .find(
                                 (appt) => appt._id === item.appointment_id
                               )
-                              .appointment_slot.start_time.slice(0, 10)
+                              .appointment_slot.start_time).format('DD.MM.YYYY')
                             : "...loading"}
                         </p>
                         <p className="w-full">
@@ -150,7 +151,13 @@ const MyAppointments = () => {
                                 appointments.find(
                                   (appt) => appt._id === item.appointment_id
                                 ).doctor_id
-                            ).first_name
+                            ).first_name + " " + doctors.find(
+                              (doc) =>
+                                doc._id ===
+                                appointments.find(
+                                  (appt) => appt._id === item.appointment_id
+                                ).doctor_id
+                            ).last_name
                             : "...loading"}
                         </p>
                         <div>

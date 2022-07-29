@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-
+import moment from "moment";
 const TimeslotCard = (params) => {
     const { item, index, doctors } = params
   return (
@@ -11,16 +11,16 @@ const TimeslotCard = (params) => {
       >
         <div className="mx-auto">
           <p className="w-full text-4xl font-bold">
-            {item.appointment_slot.start_time.slice(11, 16)}
+            {moment(item.appointment_slot.start_time).format('h:mm A')}
           </p>
           <p className="w-full">
             <span className="font-bold">Date: </span>
-            {item.appointment_slot.start_time.slice(0, 10)}
+            {moment(item.appointment_slot.start_time).format('DD.MM.YYYY')}
           </p>
           <p className="w-full">
             <span className="font-bold">Doctor: </span>
             {doctors
-              ? doctors.find((doc) => doc._id === item.doctor_id).first_name
+              ? doctors.find((doc) => doc._id === appointment.doctor_id).first_name + " " + doctors.find((doc) => doc._id === appointment.doctor_id).last_name
               : "...loading"}
           </p>
         </div>
