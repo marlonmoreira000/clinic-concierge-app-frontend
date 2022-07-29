@@ -1,8 +1,12 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
+import fetch from "node-fetch";
 import { beforeEach } from "vitest";
 import { describe, it, expect } from "vitest";
+import { waitFor } from "@testing-library/react";
 import Doctors from "../components/pages/Doctors";
+
+global.fetch = fetch;
 
 describe("Doctors", () => {
   beforeEach(() => {
@@ -15,17 +19,11 @@ describe("Doctors", () => {
     );
   });
 
-  it("Displays information for all three doctors", () => {
-    expect(screen.getAllByRole("heading", { level: 3 }).length).toEqual(3);
-    expect(screen.getByRole("heading", { name: "Dr. Zimmak" }))
-      .toBeInTheDocument;
-    expect(screen.getByRole("heading", { name: "Dr. Yousaf" }))
-      .toBeInTheDocument;
-    expect(screen.getByRole("heading", { name: "Dr. Distel" }))
-      .toBeInTheDocument;
-  });
-
-  it("Displays an image for each doctor", () => {
-    expect(screen.getAllByRole("img").length).toEqual(3);
+  it("Displays information for all two doctors", async () => {
+    await waitFor(() => {
+      expect(screen.getAllByRole("img").length).toEqual(2);
+      expect(screen.getByText("Dr. John Doe")).toBeInTheDocument;
+      expect(screen.getByText("Dr. Hans Zimmak")).toBeInTheDocument;
+    });
   });
 });

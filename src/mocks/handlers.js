@@ -146,6 +146,19 @@ const myAppointments = [
   },
 ];
 
+const createAppointment = {
+  doctor_id: "62d0d235bc3742c45027c255",
+  appointment_slot: {
+    start_time: "2022-07-30T22:00:35.000Z",
+    end_time: "2022-07-30T23:00:48.000Z",
+  },
+  booked: false,
+  _id: "62e3f1f3f521a1abc3085a1a",
+  createdAt: "2022-07-29T14:42:59.790Z",
+  updatedAt: "2022-07-29T14:42:59.790Z",
+  __v: 0,
+};
+
 // Adding handlers for msw mocking
 export const handlers = [
   // Login handler
@@ -222,10 +235,19 @@ export const handlers = [
     }
   ),
 
+  // Get Booking by ID handler
   rest.get(
     "https://clinic-concierge.herokuapp.com/api/v1/bookings?userId=62d3a0f50038869f4faa3660",
     (req, res, ctx) => {
       return res(ctx.status(200), ctx.json(myAppointments));
+    }
+  ),
+
+  // Create new Appointment handler
+  rest.post(
+    "https://clinic-concierge.herokuapp.com/api/v1/appointments",
+    (req, res, ctx) => {
+      return res(ctx.status(200), ctx.json(createAppointment));
     }
   ),
 ];

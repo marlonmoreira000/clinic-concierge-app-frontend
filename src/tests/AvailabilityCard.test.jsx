@@ -26,7 +26,7 @@ const mockDoc = {
   },
 };
 
-describe("Timeslot Card", async () => {
+describe("Avilability Card", async () => {
   beforeEach(() => {
     render(
         <AvailabilityCard item={mockItem} doctors={[mockDoc]} index={1} />
@@ -38,10 +38,10 @@ describe("Timeslot Card", async () => {
   });
 
   it("Displays provided date", () => {
-    expect(screen.getByText("14:30")).toBeInTheDocument();
+    expect(screen.getByText("08.08.2022")).toBeInTheDocument();
   });
 
   it("Displays provided start time", () => {
-    expect(screen.getByText("2022-08-08")).toBeInTheDocument();
+    expect(screen.getByText("2:30 PM")).toBeInTheDocument();
   });
 });

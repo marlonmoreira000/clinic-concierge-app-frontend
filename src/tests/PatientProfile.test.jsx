@@ -30,10 +30,7 @@ describe("PatientProfile", () => {
     const streetNumberField = screen.getByPlaceholderText("street number");
     const streetNameField = screen.getByPlaceholderText("street name");
     const suburbField = screen.getByPlaceholderText("suburb/city");
-    //const stateField = screen.getByTestId("select state");
-    //const stateField = screen.getByRole("combobox", { name: "" });
-    //console.log("firstNameField: %O", firstNameField);
-    //console.log("stateFiled: %O", stateField);
+
     const postcodeField = screen.getByPlaceholderText("Postcode");
 
     // Input credentials to form

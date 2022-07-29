@@ -1,10 +1,13 @@
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, beforeEach } from "vitest";
 import { BrowserRouter } from "react-router-dom";
+import fetch from "node-fetch";
 import Nav from "../components/Nav";
 import App from "../components/App";
 import userEvent from "@testing-library/user-event";
+
+global.fetch = fetch;
 
 describe("Nav", () => {
   beforeEach(() => {
@@ -31,6 +34,6 @@ describe("Nav function", () => {
     render(<App />);
     await userEvent.click(screen.getAllByText("Doctors")[1]);
     // Doctors.jsx should be the only page that displays three separate images, thereby proving navigation to correct page
-    expect(screen.getAllByRole("img").length).toEqual(3);
+    expect(screen.getAllByRole("img").length).toEqual(2);
   })
 });

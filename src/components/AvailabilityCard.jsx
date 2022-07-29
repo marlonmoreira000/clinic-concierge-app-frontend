@@ -1,6 +1,7 @@
 import React from "react";
 import { message } from "antd";
 import { useToken } from "./auth/useToken";
+import moment from "moment";
 
 const AvailabilityCard = (params) => {
   const [token, setToken] = useToken();
@@ -35,11 +36,11 @@ const AvailabilityCard = (params) => {
     >
       <div className="mx-auto">
         <p className="w-full text-4xl font-bold">
-          {item.appointment_slot.start_time.slice(11, 16)}
+          {moment(item.appointment_slot.start_time).format('h:mm A')}
         </p>
         <p className="w-full">
           <span className="font-bold">Date: </span>
-          {item.appointment_slot.start_time.slice(0, 10)}
+          {moment(item.appointment_slot.start_time).format('DD.MM.YYYY')}
         </p>
       </div>
       <div>
