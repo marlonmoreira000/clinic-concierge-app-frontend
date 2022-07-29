@@ -148,7 +148,7 @@ const MyAppointments = () => {
                                     appointments.find(
                                       (appt) => appt._id === item.appointment_id
                                     ).doctor_id
-                                ).first_name
+                                ).last_name
                               : "...loading"}
                           </p>
                           <div>

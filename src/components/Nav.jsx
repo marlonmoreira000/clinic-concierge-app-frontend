@@ -115,7 +115,7 @@ const Nav = () => {
               <Link to="/bookings">Bookings</Link>
             </li>
             <li className="p-4 border-b border-gray-400">
-              {user && user.roles[1] == "doctor" ? (
+              {user && user.roles[0] == "doctor" ? (
                 <Link to="/times">Availability</Link>
               ) : (
                 <Link to="/my-appointments">My appts</Link>
