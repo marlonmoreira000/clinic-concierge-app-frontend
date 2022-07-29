@@ -38,6 +38,7 @@ const Doctors = () => {
       <Header text="Doctors." />
       <div>
         <div className="p-12 flex flex-wrap justify-center">
+
           {doctors ? doctors.map((doctor, index) => {
             return (
               <div key={index} className="p-4 w-[350px]">
@@ -59,6 +60,7 @@ const Doctors = () => {
                 </div>
               </div>)
           }) : "..loading"}
+
         </div>
       </div>
     </>
