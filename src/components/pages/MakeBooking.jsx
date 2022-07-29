@@ -5,6 +5,7 @@ import Header from "../Header";
 import { Input, message } from "antd";
 import { useToken } from "../auth/useToken";
 import { useUser } from "../auth/useUser";
+import moment from "moment";
 
 const MakeBooking = () => {
   // state
@@ -73,10 +74,7 @@ const MakeBooking = () => {
 
   useEffect(() => {
     if (bookings && appointment && appointment.booked) {
-      setNotes(
-        bookings.find((item) => item.appointment_id === appointment._id)
-          .reason_for_visit
-      );
+      setNotes(bookings.find((item) => item.appointment_id === appointment._id).reason_for_visit)
     }
   }, [bookings, appointment]);
 
@@ -103,24 +101,24 @@ const MakeBooking = () => {
           reason_for_visit: notes || "no notes provided",
         }),
       }
-    )
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
+    ).then((res) => {
+      console.log("res: ", res);
+      return res.json();
+    }).then((data) => {
+      console.log("data: ", data);
+      if (data.error) {
+        message.error(data.message)
+      } else {
         nav("/");
         message.success(
-          `Your appointment has been ${
-            appointment.booked ? "changed" : "booked"
+          `Your appointment has been ${appointment.booked ? "changed" : "booked"
           }!`
         );
-      })
-      .catch((err) => {
-        console.log("error", err);
-        nav("/");
-        message.error("There was an error. Please try again.");
-      });
+      }
+    }).catch((err) => {
+      console.log("error:", err);
+      message.error("There was an error. Please try again.");
+    });
   };
 
   return (
@@ -132,19 +130,21 @@ const MakeBooking = () => {
             <h3 className="text-2xl font-bold pb-2">Appointment Details</h3>
             <p className="py-2">
               <span className="font-bold">Doctor name:</span>{" "}
-              {appointment && doctors
-                ? doctors.find((doc) => doc._id === appointment.doctor_id)
-                    .last_name
+              {(appointment && doctors)
+                ? doctors.find((doc) => doc._id === appointment.doctor_id).last_name + " " + doctors.find((doc) => doc._id === appointment.doctor_id).last_name
                 : "...loading"}
             </p>
             <p className="py-2">
               <span className="font-bold">Date/Time: </span>
               {appointment
-                ? appointment.appointment_slot.start_time
+                ? moment(appointment.appointment_slot.start_time).format('DD.MM.YYYY h:mm A')
                 : "...loading"}
             </p>
             <p className="py-2">
-              <span className="font-bold">Duration:</span> 1 hour
+              <span className="font-bold">Duration: </span>
+              {appointment
+                ? moment.duration(moment(appointment.appointment_slot.end_time).format('h:mm')).asMinutes() - moment.duration(moment(appointment.appointment_slot.start_time).format('h:mm')).asMinutes() + " minutes"
+                : "...loading"}
             </p>
             <p className="py-2">
               <span className="font-bold">Reference No:</span> {params.id}

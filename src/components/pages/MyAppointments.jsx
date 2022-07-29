@@ -5,6 +5,7 @@ import { message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useToken } from "../auth/useToken";
 import { useUser } from "../auth/useUser";
+import moment from "moment";
 
 const MyAppointments = () => {
   const [appointments, setAppointments] = useState(false);
@@ -122,21 +123,21 @@ const MyAppointments = () => {
                         <div className="mx-auto">
                           <p className="w-full text-4xl font-bold">
                             {appointments
-                              ? appointments
-                                  .find(
+                              ? moment(
+                                  appointments.find(
                                     (appt) => appt._id === item.appointment_id
-                                  )
-                                  .appointment_slot.start_time.slice(11, 16)
+                                  ).appointment_slot.start_time
+                                ).format("h:mm A")
                               : "...loading"}
                           </p>
                           <p className="w-full">
                             <span className="font-bold">Date: </span>
                             {appointments
-                              ? appointments
-                                  .find(
+                              ? moment(
+                                  appointments.find(
                                     (appt) => appt._id === item.appointment_id
-                                  )
-                                  .appointment_slot.start_time.slice(0, 10)
+                                  ).appointment_slot.start_time
+                                ).format("DD.MM.YYYY")
                               : "...loading"}
                           </p>
                           <p className="w-full">
@@ -148,27 +149,35 @@ const MyAppointments = () => {
                                     appointments.find(
                                       (appt) => appt._id === item.appointment_id
                                     ).doctor_id
+                                ).first_name +
+                                " " +
+                                doctors.find(
+                                  (doc) =>
+                                    doc._id ===
+                                    appointments.find(
+                                      (appt) => appt._id === item.appointment_id
+                                    ).doctor_id
                                 ).last_name
                               : "...loading"}
                           </p>
-                          <div>
-                            <button
-                              appt={item.appointment_id}
-                              id={item._id}
-                              onClick={handleEditButtonClick}
-                              className="bg-[#d6c44e] hover:bg-[#e2d687] text-gray-100 font-bold py-2 px-6 rounded-md mt-2 mb-2 mx-[1rem]"
-                            >
-                              Edit
-                            </button>
-                            <button
-                              appt={item.appointment_id}
-                              id={item._id}
-                              onClick={handleDeleteButtonClick}
-                              className="bg-[#d25c5c] hover:bg-[#e49292] text-gray-100 font-bold py-2 px-6 rounded-md mt-2 mb-2 mx-[1rem]"
-                            >
-                              Delete
-                            </button>
-                          </div>
+                        </div>
+                        <div>
+                          <button
+                            appt={item.appointment_id}
+                            id={item._id}
+                            onClick={handleEditButtonClick}
+                            className="bg-[#d6c44e] hover:bg-[#e2d687] text-gray-100 font-bold py-2 px-6 rounded-md mt-2 mb-2 mx-[1rem]"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            appt={item.appointment_id}
+                            id={item._id}
+                            onClick={handleDeleteButtonClick}
+                            className="bg-[#d25c5c] hover:bg-[#e49292] text-gray-100 font-bold py-2 px-6 rounded-md mt-2 mb-2 mx-[1rem]"
+                          >
+                            Delete
+                          </button>
                         </div>
                       </li>
                     );

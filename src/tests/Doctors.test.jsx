@@ -1,8 +1,11 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
+import fetch from "node-fetch";
 import { beforeEach } from "vitest";
 import { describe, it, expect } from "vitest";
 import Doctors from "../components/pages/Doctors";
+
+global.fetch = fetch;
 
 describe("Doctors", () => {
   beforeEach(() => {
@@ -15,17 +18,12 @@ describe("Doctors", () => {
     );
   });
 
-  it("Displays information for all three doctors", () => {
-    expect(screen.getAllByRole("heading", { level: 3 }).length).toEqual(3);
-    expect(screen.getByRole("heading", { name: "Dr. Zimmak" }))
+  it("Displays information for all three doctors", async () => {
+    await expect(screen.getByText("Dr. Zimmak"))
       .toBeInTheDocument;
-    expect(screen.getByRole("heading", { name: "Dr. Yousaf" }))
+    await expect(screen.getByText("Dr. Yousaf"))
       .toBeInTheDocument;
-    expect(screen.getByRole("heading", { name: "Dr. Distel" }))
+    await expect(screen.getByText("Dr. Distel"))
       .toBeInTheDocument;
-  });
-
-  it("Displays an image for each doctor", () => {
-    expect(screen.getAllByRole("img").length).toEqual(3);
   });
 });
