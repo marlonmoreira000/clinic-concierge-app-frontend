@@ -11,15 +11,14 @@ const MakeBooking = () => {
   const [appointment, setAppointment] = useState("");
   const [notes, setNotes] = useState("");
   const [bookings, setBookings] = useState("");
-  const [doctors, setDoctors] = useState("")
-  const user = useUser()
-
+  const [doctors, setDoctors] = useState("");
+  const user = useUser();
 
   // variables
   const { TextArea } = Input;
   const params = useParams();
   const nav = useNavigate();
-  const [token, setToken] = useToken()
+  const [token, setToken] = useToken();
 
   // effects
   useEffect(() => {
@@ -71,12 +70,15 @@ const MakeBooking = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-    
-    useEffect(() => {
-        if (bookings && appointment && appointment.booked) {
-            setNotes(bookings.find((item) => item.appointment_id === appointment._id).reason_for_visit)
-        }
-    }, [bookings, appointment]);
+
+  useEffect(() => {
+    if (bookings && appointment && appointment.booked) {
+      setNotes(
+        bookings.find((item) => item.appointment_id === appointment._id)
+          .reason_for_visit
+      );
+    }
+  }, [bookings, appointment]);
 
   // functions
   const handleNotesChange = (e) => {
@@ -86,7 +88,9 @@ const MakeBooking = () => {
   const handleButtonClick = (e) => {
     // send POST request to make booking
     fetch(
-      `https://clinic-concierge.herokuapp.com/api/v1/bookings/${appointment.booked ? appointment._id : ""}`,
+      `https://clinic-concierge.herokuapp.com/api/v1/bookings/${
+        appointment.booked ? appointment._id : ""
+      }`,
       {
         method: appointment.booked ? "PUT" : "POST",
         headers: {
@@ -99,7 +103,6 @@ const MakeBooking = () => {
           reason_for_visit: notes || "no notes provided",
         }),
       }
-      
     )
       .then((res) => {
         return res.json();
@@ -129,8 +132,9 @@ const MakeBooking = () => {
             <h3 className="text-2xl font-bold pb-2">Appointment Details</h3>
             <p className="py-2">
               <span className="font-bold">Doctor name:</span>{" "}
-              {(appointment && doctors)
-                ? doctors.find((doc) => doc._id === appointment.doctor_id).first_name
+              {appointment && doctors
+                ? doctors.find((doc) => doc._id === appointment.doctor_id)
+                    .first_name
                 : "...loading"}
             </p>
             <p className="py-2">
