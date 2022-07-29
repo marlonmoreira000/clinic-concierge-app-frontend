@@ -16,9 +16,7 @@ const Footer = () => {
             Beachside GP.
           </h1>
           <p className="py-4 pr-[1rem]">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id odit
-            ullam iste repellat consequatur libero reiciendis, blanditiis
-            accusantium.
+            Caring for our community.
           </p>
           <div className="flex justify-between md:w-[75%] my-6">
             <FaFacebookSquare size={30} />

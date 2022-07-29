@@ -10,12 +10,10 @@ const Contact = () => {
           <div className="text-center p-8 max-w-[700px]">
             <h3 className="text-xl font-bold pb-4">Details</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit,
-              quisquam in consequatur provident voluptas perspiciatis nam
-              ratione, ipsam, blanditiis asperiores unde. Laboriosam hic veniam
-              laudantium consequuntur! Quia quasi id error, corrupti ipsam amet
-              molestias natus illum impedit animi aperiam tempora minus ea cum
-              a. Dignissimos aspernatur eveniet nulla et eius.
+              We're available for appointments and walk-ins seven days a week.
+              With ample curbside parking, and nearby local transport options,
+              we're easy to reach, and waiting to serve our community.
+              Appointments are available online, or over the phone.
             </p>
           </div>
           <div className="p-8">
