@@ -78,7 +78,6 @@ const Bookings = () => {
   // functions
   const getDropdownItems = (data) => {
     let arr = [{ label: "All doctors", key: "0" }]; // set initial value
-    // let arr = []; // set initial value
     data.forEach((item, index) => {
       arr.push({
         label: <a id={item["_id"]}>{item["last_name"]}</a>,
@@ -118,14 +117,14 @@ const Bookings = () => {
             <ul className="pt-6">
               {appointments
                 ? appointments.map((item, index) => {
-                    return (
-                      <TimeslotCard
-                        item={item}
-                        index={index}
-                        doctors={doctors}
-                      />
-                    );
-                  })
+                  return (
+                    <TimeslotCard
+                      item={item}
+                      index={index}
+                      doctors={doctors}
+                    />
+                  );
+                })
                 : "Loading..."}
             </ul>
           </div>

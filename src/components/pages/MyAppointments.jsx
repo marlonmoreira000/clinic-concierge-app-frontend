@@ -106,7 +106,7 @@ const MyAppointments = () => {
 
   return (
     <>
-      <Header text="My Appointments." />
+      <Header text="My Appointments" />
       <div className="w-full p-8 bg-[#f0edeb]">
         <div className="text-center">
           {/* time slots */}

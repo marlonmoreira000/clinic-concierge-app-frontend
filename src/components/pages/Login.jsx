@@ -20,8 +20,6 @@ const Login = () => {
         setToken(response.data.accessToken);
         localStorage.setItem("refreshToken", response.data.refreshToken);
         navigate("/");
-      } else {
-        message.error(response.data.message);
       }
     } catch (error) {
       if (error.response.data.message) {

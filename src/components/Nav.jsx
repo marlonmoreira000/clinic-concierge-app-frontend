@@ -25,8 +25,8 @@ const Nav = () => {
         "Content-Type": " application/json",
       },
       body: JSON.stringify({
-        refreshToken: `${localStorage.getItem("refreshToken")}`,
-      }), // is this the right token to send?
+        token: `${localStorage.getItem("refreshToken")}`,
+      }), 
     })
       .then((res) => res.json())
       .then((data) => {
