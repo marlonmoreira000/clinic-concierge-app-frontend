@@ -12,7 +12,10 @@ const Register = () => {
   // Send request with supplied values to server for confirmation
   const onFinish = async (values) => {
     try {
-      const response = await axios.post("https://clinic-concierge.herokuapp.com/api/v1/register", values);
+      const response = await axios.post(
+        "https://clinic-concierge.herokuapp.com/api/v1/register",
+        values
+      );
       // If registration successful, notify user and redirect to login, otherwise notify error
       if (!response.data.error) {
         message.success(response.data.message);

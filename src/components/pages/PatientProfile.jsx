@@ -144,12 +144,12 @@ const PatientProfile = () => {
             </Form.Item>
             <Form.Item name="state"
               initialValue="Victoria" rules={
-              [
-                {
-                  required: true,
-                  message: "State is required",
-                }
-              ]}>
+                [
+                  {
+                    required: true,
+                    message: "State is required",
+                  }
+                ]}>
               <Select data-testid="select state" placeholder="State">
                 <Select.Option value="Victoria">VIC</Select.Option>
                 <Select.Option value="Queensland">QLD</Select.Option>

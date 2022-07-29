@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 import { Link } from "react-router-dom";
 
 const TimeslotCard = (params) => {
-    const { item, index, doctors } = params
+  const { item, index, doctors } = params;
   return (
     <Link to={`/bookings/${item._id}`}>
       <li
@@ -27,6 +27,6 @@ const TimeslotCard = (params) => {
       </li>
     </Link>
   );
-}
+};
 
-export default TimeslotCard
+export default TimeslotCard;
