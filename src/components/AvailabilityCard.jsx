@@ -1,9 +1,11 @@
 import React from "react";
 import { message } from "antd";
 import { useToken } from "./auth/useToken";
+import { useNavigate } from "react-router-dom";
 import moment from "moment";
 
 const AvailabilityCard = (params) => {
+  const navigate = useNavigate();
   const [token, setToken] = useToken();
   const handleDeleteButtonClick = (e) => {
     const appointmentId = e.target.id;
@@ -20,7 +22,7 @@ const AvailabilityCard = (params) => {
     )
       .then(() => {
           message.success("Timeslot deleted.");
-          window.location.reload(false);
+          window.location.reload();
       })
       .catch((err) => {
         console.log(err);
