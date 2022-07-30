@@ -34,7 +34,7 @@ const Register = () => {
 
   const onFinishFailed = (errorInfo) => {
     console.log(`Failed: ${errorInfo}`);
-    message.error(`Something went wrong, ${errorInfo}`);
+    message.error("Something went wrong");
   };
 
   return (
