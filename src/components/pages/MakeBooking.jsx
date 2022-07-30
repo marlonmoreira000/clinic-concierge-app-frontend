@@ -84,9 +84,10 @@ const MakeBooking = () => {
   };
 
   const handleButtonClick = (e) => {
-    // send POST request to make booking
+    // send POST request to make booking or PUT to update existing booking
+    const booking = bookings.find((item) => item.appointment_id === appointment._id);
     fetch(
-      `https://clinic-concierge.herokuapp.com/api/v1/bookings/${appointment.booked ? appointment._id : ""}`,
+      `https://clinic-concierge.herokuapp.com/api/v1/bookings/${appointment.booked ? booking._id : ""}`,
       {
         method: appointment.booked ? "PUT" : "POST",
         headers: {
@@ -105,7 +106,7 @@ const MakeBooking = () => {
       if (data.error) {
         message.error(data.message)
       } else {
-        nav("/");
+        nav("/my-appointments");
         message.success(
           `Your appointment has been ${appointment.booked ? "changed" : "booked"
           }!`
